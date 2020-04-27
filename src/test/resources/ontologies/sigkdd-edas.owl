@@ -6,7 +6,7 @@
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://sigkdd+edas"/>
+    <owl:Ontology rdf:about="http://sigkdd_edas"/>
     
 
 
@@ -22,20 +22,10 @@
     
 
 
-    <!-- http://conference#gives_presentations -->
+    <!-- http://conference_edas#conference@has_a_review_expertise||edas@hasRating -->
 
 
-    <owl:ObjectProperty rdf:about="http://conference#gives_presentations">
-        <rdfs:domain rdf:resource="http://sigkdd#Speaker"/>
-        <rdfs:range rdf:resource="http://conference#Conference_document"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://conference#has_a_review_expertise -->
-
-
-    <owl:ObjectProperty rdf:about="http://conference#has_a_review_expertise">
+    <owl:ObjectProperty rdf:about="http://conference_edas#conference@has_a_review_expertise||edas@hasRating">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://edas#ActivePaper"/>
         <rdfs:range rdf:resource="http://edas#ReviewRating"/>
@@ -43,12 +33,22 @@
     
 
 
-    <!-- http://conference#is_given_by -->
+    <!-- http://conference_sigkdd#conference@is_given_by||sigkdd@presentation -->
 
 
-    <owl:ObjectProperty rdf:about="http://conference#is_given_by">
-        <owl:inverseOf rdf:resource="http://conference#gives_presentations"/>
-        <rdfs:domain rdf:resource="http://conference#Conference_document"/>
+    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation">
+        <rdfs:domain rdf:resource="http://sigkdd#Speaker"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference_sigkdd#conference@is_given_by||sigkdd@presentationed_by -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@is_given_by||sigkdd@presentationed_by">
+        <owl:inverseOf rdf:resource="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
         <rdfs:range rdf:resource="http://sigkdd#Speaker"/>
     </owl:ObjectProperty>
     
@@ -59,8 +59,8 @@
 
     <owl:ObjectProperty rdf:about="http://edas#attendeeAt">
         <owl:inverseOf rdf:resource="http://edas#hasAttendee"/>
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
     </owl:ObjectProperty>
     
 
@@ -71,7 +71,7 @@
     <owl:ObjectProperty rdf:about="http://edas#belongsToEvent">
         <owl:inverseOf rdf:resource="http://edas#hasProgramme"/>
         <rdfs:domain rdf:resource="http://edas#Programme"/>
-        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
     </owl:ObjectProperty>
     
 
@@ -81,7 +81,7 @@
 
     <owl:ObjectProperty rdf:about="http://edas#forEvent">
         <rdfs:domain rdf:resource="http://edas#Call"/>
-        <rdfs:range rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
     </owl:ObjectProperty>
     
 
@@ -90,8 +90,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#hasAttendee">
-        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
-        <rdfs:range rdf:resource="http://conference#Person"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
     </owl:ObjectProperty>
     
 
@@ -101,7 +101,7 @@
 
     <owl:ObjectProperty rdf:about="http://edas#hasCall">
         <owl:inverseOf rdf:resource="http://edas#forEvent"/>
-        <rdfs:domain rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
         <rdfs:range rdf:resource="http://edas#Call"/>
     </owl:ObjectProperty>
     
@@ -112,8 +112,8 @@
 
     <owl:ObjectProperty rdf:about="http://edas#hasCountry">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
-        <rdfs:range rdf:resource="http://edas#Country"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:ObjectProperty>
     
 
@@ -122,8 +122,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#hasLocation">
-        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
-        <rdfs:range rdf:resource="http://sigkdd#Place"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <rdfs:range rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:ObjectProperty>
     
 
@@ -133,8 +133,8 @@
 
     <owl:ObjectProperty rdf:about="http://edas#hasMember">
         <owl:inverseOf rdf:resource="http://edas#isMemberOf"/>
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
-        <rdfs:range rdf:resource="http://conference#Person"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
     </owl:ObjectProperty>
     
 
@@ -154,7 +154,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#hasProgramme">
-        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
         <rdfs:range rdf:resource="http://edas#Programme"/>
     </owl:ObjectProperty>
     
@@ -168,24 +168,14 @@
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
-                    <rdf:Description rdf:about="http://conference#Person"/>
-                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
                     <rdf:Description rdf:about="http://edas#ConferenceSession"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Person||edas@Person"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
-        <rdfs:range rdf:resource="http://conference#Conference_document"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas#hasRelatedPaper -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas#hasRelatedPaper">
-        <rdfs:domain rdf:resource="http://conference#Regular_author"/>
-        <rdfs:range rdf:resource="http://conference#Paper"/>
+        <rdfs:range rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
     </owl:ObjectProperty>
     
 
@@ -195,7 +185,7 @@
 
     <owl:ObjectProperty rdf:about="http://edas#hasReviewHistory">
         <owl:inverseOf rdf:resource="http://edas#isReviewHistoryOf"/>
-        <rdfs:domain rdf:resource="http://conference#Reviewer"/>
+        <rdfs:domain rdf:resource="http://conference_edas#conference@Reviewer||edas@Reviewer"/>
         <rdfs:range rdf:resource="http://edas#PersonalReviewHistory"/>
     </owl:ObjectProperty>
     
@@ -209,12 +199,12 @@
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
-                    <rdf:Description rdf:about="http://conference#Paper"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Paper||edas@Paper"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
-        <rdfs:range rdf:resource="http://conference#Topic"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
     </owl:ObjectProperty>
     
 
@@ -228,8 +218,8 @@
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://edas#SessionChair"/>
-                    <rdf:Description rdf:about="http://edas#TPCMember"/>
-                    <rdf:Description rdf:about="http://sigkdd#General_Chair"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
+                    <rdf:Description rdf:about="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -247,8 +237,8 @@
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://edas#SessionChair"/>
-                    <rdf:Description rdf:about="http://edas#TPCMember"/>
-                    <rdf:Description rdf:about="http://sigkdd#General_Chair"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
+                    <rdf:Description rdf:about="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
@@ -261,8 +251,8 @@
 
     <owl:ObjectProperty rdf:about="http://edas#isLocationOf">
         <owl:inverseOf rdf:resource="http://edas#hasLocation"/>
-        <rdfs:domain rdf:resource="http://sigkdd#Place"/>
-        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
     </owl:ObjectProperty>
     
 
@@ -271,8 +261,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#isMemberOf">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -291,7 +281,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#isProviderOf">
-        <rdfs:domain rdf:resource="http://conference#Organization"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
         <rdfs:range rdf:resource="http://edas#Sponsorship"/>
     </owl:ObjectProperty>
     
@@ -302,7 +292,7 @@
 
     <owl:ObjectProperty rdf:about="http://edas#isReviewHistoryOf">
         <rdfs:domain rdf:resource="http://edas#PersonalReviewHistory"/>
-        <rdfs:range rdf:resource="http://conference#Reviewer"/>
+        <rdfs:range rdf:resource="http://conference_edas#conference@Reviewer||edas@Reviewer"/>
     </owl:ObjectProperty>
     
 
@@ -311,37 +301,17 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#isReviewedBy">
-        <rdfs:domain rdf:resource="http://conference#Paper"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Reviewer"/>
+                    <rdf:Description rdf:about="http://conference_edas#conference@Reviewer||edas@Reviewer"/>
                     <rdf:Description rdf:about="http://edas#SessionChair"/>
-                    <rdf:Description rdf:about="http://edas#TPCMember"/>
-                    <rdf:Description rdf:about="http://sigkdd#General_Chair"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
+                    <rdf:Description rdf:about="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas#isReviewing -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas#isReviewing">
-        <owl:inverseOf rdf:resource="http://edas#isReviewedBy"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Reviewer"/>
-                    <rdf:Description rdf:about="http://edas#SessionChair"/>
-                    <rdf:Description rdf:about="http://edas#TPCMember"/>
-                    <rdf:Description rdf:about="http://sigkdd#General_Chair"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://conference#Paper"/>
     </owl:ObjectProperty>
     
 
@@ -350,26 +320,15 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#isTopicOf">
-        <rdfs:domain rdf:resource="http://conference#Topic"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
-                    <rdf:Description rdf:about="http://conference#Paper"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Paper||edas@Paper"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas#isWrittenBy -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas#isWrittenBy">
-        <owl:inverseOf rdf:resource="http://edas#hasRelatedPaper"/>
-        <rdfs:domain rdf:resource="http://conference#Paper"/>
-        <rdfs:range rdf:resource="http://conference#Regular_author"/>
     </owl:ObjectProperty>
     
 
@@ -380,7 +339,7 @@
     <owl:ObjectProperty rdf:about="http://edas#providedBy">
         <owl:inverseOf rdf:resource="http://edas#isProviderOf"/>
         <rdfs:domain rdf:resource="http://edas#Sponsorship"/>
-        <rdfs:range rdf:resource="http://conference#Organization"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
     </owl:ObjectProperty>
     
 
@@ -389,7 +348,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#relatedToEvent">
-        <rdfs:domain rdf:resource="http://conference#Accepted_contribution"/>
+        <rdfs:domain rdf:resource="http://conference_edas#conference@Accepted_contribution||edas@AcceptedPaper"/>
         <rdfs:range rdf:resource="http://edas#PaperPresentation"/>
     </owl:ObjectProperty>
     
@@ -401,7 +360,7 @@
     <owl:ObjectProperty rdf:about="http://edas#relatedToPaper">
         <owl:inverseOf rdf:resource="http://edas#relatedToEvent"/>
         <rdfs:domain rdf:resource="http://edas#PaperPresentation"/>
-        <rdfs:range rdf:resource="http://conference#Accepted_contribution"/>
+        <rdfs:range rdf:resource="http://conference_edas#conference@Accepted_contribution||edas@AcceptedPaper"/>
     </owl:ObjectProperty>
     
 
@@ -410,17 +369,58 @@
 
 
     <owl:ObjectProperty rdf:about="http://edas#relatesTo">
-        <rdfs:domain rdf:resource="http://conference#Conference_document"/>
+        <rdfs:domain rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
-                    <rdf:Description rdf:about="http://conference#Person"/>
-                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
                     <rdf:Description rdf:about="http://edas#ConferenceSession"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Person||edas@Person"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas_confOf#confOf@reviewes||edas@isReviewing -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@reviewes||edas@isReviewing">
+        <owl:inverseOf rdf:resource="http://edas#isReviewedBy"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference_edas#conference@Reviewer||edas@Reviewer"/>
+                    <rdf:Description rdf:about="http://edas#SessionChair"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
+                    <rdf:Description rdf:about="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas_confOf#confOf@writes||edas@hasRelatedPaper -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@writes||edas@hasRelatedPaper">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Author||edas@Author"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas_confOf#confOf@writtenBy||edas@isWrittenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@writtenBy||edas@isWrittenBy">
+        <owl:inverseOf rdf:resource="http://edas_confOf#confOf@writes||edas@hasRelatedPaper"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Author||edas@Author"/>
     </owl:ObjectProperty>
     
 
@@ -448,8 +448,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#can_stay_in">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://sigkdd#Place"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:range rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:ObjectProperty>
     
 
@@ -480,7 +480,7 @@
 
     <owl:ObjectProperty rdf:about="http://sigkdd#hold">
         <rdfs:domain rdf:resource="http://sigkdd#ACM_SIGKDD"/>
-        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -490,7 +490,7 @@
 
     <owl:ObjectProperty rdf:about="http://sigkdd#holded_by">
         <owl:inverseOf rdf:resource="http://sigkdd#hold"/>
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://sigkdd#ACM_SIGKDD"/>
     </owl:ObjectProperty>
     
@@ -500,7 +500,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#notification_until">
-        <rdfs:domain rdf:resource="http://conference#Regular_author"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
         <rdfs:range rdf:resource="http://sigkdd#Deadline_Author_notification"/>
     </owl:ObjectProperty>
     
@@ -510,7 +510,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#obtain">
-        <rdfs:domain rdf:resource="http://conference#Regular_author"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
         <rdfs:range rdf:resource="http://sigkdd#Award"/>
     </owl:ObjectProperty>
     
@@ -520,7 +520,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#pay">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
         <rdfs:range rdf:resource="http://sigkdd#Registration_fee"/>
     </owl:ObjectProperty>
     
@@ -532,7 +532,7 @@
     <owl:ObjectProperty rdf:about="http://sigkdd#payed_by">
         <owl:inverseOf rdf:resource="http://sigkdd#pay"/>
         <rdfs:domain rdf:resource="http://sigkdd#Registration_fee"/>
-        <rdfs:range rdf:resource="http://conference#Person"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
     </owl:ObjectProperty>
     
 
@@ -562,8 +562,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#submit">
-        <rdfs:domain rdf:resource="http://conference#Regular_author"/>
-        <rdfs:range rdf:resource="http://conference#Paper"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
     </owl:ObjectProperty>
     
 
@@ -572,7 +572,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#submit_until">
-        <rdfs:domain rdf:resource="http://conference#Conference_document"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
         <rdfs:range rdf:resource="http://sigkdd#Deadline"/>
     </owl:ObjectProperty>
     
@@ -590,31 +590,11 @@
     
 
 
-    <!-- http://conference#has_an_email -->
+    <!-- http://conference_sigkdd#conference@has_an_email||sigkdd@E-mail -->
 
 
-    <owl:DatatypeProperty rdf:about="http://conference#has_an_email">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://conference#has_the_first_name -->
-
-
-    <owl:DatatypeProperty rdf:about="http://conference#has_the_first_name">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://conference#has_the_last_name -->
-
-
-    <owl:DatatypeProperty rdf:about="http://conference#has_the_last_name">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
+    <owl:DatatypeProperty rdf:about="http://conference_sigkdd#conference@has_an_email||sigkdd@E-mail">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -624,7 +604,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#hasBiography">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -657,8 +637,8 @@
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Person"/>
                     <rdf:Description rdf:about="http://edas#ContactInformation"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Person||edas@Person"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -671,7 +651,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#hasEndDateTime">
-        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -701,7 +681,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#hasStartDateTime">
-        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -743,7 +723,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#manuscriptDueOn">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:comment>Conference Manuscript Date and Time Deadline</rdfs:comment>
     </owl:DatatypeProperty>
@@ -754,7 +734,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#paperDueOn">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:comment>Conference Paper Date and Time Deadline</rdfs:comment>
     </owl:DatatypeProperty>
@@ -765,9 +745,29 @@
 
 
     <owl:DatatypeProperty rdf:about="http://edas#registrationDueOn">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:comment>Conference Registration Date and Time Deadline</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://edas_confOf#confOf@hasFirstName||edas@hasFirstName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas_confOf#confOf@hasFirstName||edas@hasFirstName">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://edas_confOf#confOf@hasSurname||edas@hasLastName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas_confOf#confOf@hasSurname||edas@hasLastName">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
@@ -776,7 +776,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#City_of_conference">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -802,38 +802,6 @@
     
 
 
-    <!-- http://sigkdd#End_of_conference -->
-
-
-    <owl:DatatypeProperty rdf:about="http://sigkdd#End_of_conference">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <rdfs:comment>Conference End Date and Time</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://sigkdd#Name -->
-
-
-    <owl:DatatypeProperty rdf:about="http://sigkdd#Name">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://sigkdd#Name_of_conference -->
-
-
-    <owl:DatatypeProperty rdf:about="http://sigkdd#Name_of_conference">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>Conference Full Name</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
     <!-- http://sigkdd#Name_of_sponsor -->
 
 
@@ -848,16 +816,28 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#Nation">
-        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
 
 
-    <!-- http://sigkdd#Price -->
+    <!-- http://sigkdd_edas#edas@endDate||sigkdd@End_of_conference -->
 
 
-    <owl:DatatypeProperty rdf:about="http://sigkdd#Price">
+    <owl:DatatypeProperty rdf:about="http://sigkdd_edas#edas@endDate||sigkdd@End_of_conference">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Conference End Date and Time</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://sigkdd_edas#edas@hasCostAmount||sigkdd@Price -->
+
+
+    <owl:DatatypeProperty rdf:about="http://sigkdd_edas#edas@hasCostAmount||sigkdd@Price">
         <rdfs:domain rdf:resource="http://edas#Sponsorship"/>
         <rdfs:domain rdf:resource="http://sigkdd#Registration_fee"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
@@ -865,11 +845,34 @@
     
 
 
-    <!-- http://sigkdd#Start_of_conference -->
+    <!-- http://sigkdd_edas#edas@hasName||sigkdd@Name -->
 
 
-    <owl:DatatypeProperty rdf:about="http://sigkdd#Start_of_conference">
-        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+    <owl:DatatypeProperty rdf:about="http://sigkdd_edas#edas@hasName||sigkdd@Name">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://sigkdd_edas#edas@hasName||sigkdd@Name_of_conference -->
+
+
+    <owl:DatatypeProperty rdf:about="http://sigkdd_edas#edas@hasName||sigkdd@Name_of_conference">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Conference Full Name</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://sigkdd_edas#edas@startDate||sigkdd@Start_of_conference -->
+
+
+    <owl:DatatypeProperty rdf:about="http://sigkdd_edas#edas@startDate||sigkdd@Start_of_conference">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:comment>Conference Start Date and Time</rdfs:comment>
     </owl:DatatypeProperty>
@@ -888,27 +891,12 @@
     
 
 
-    <!-- http://conference#Abstract -->
+    <!-- http://conference_edas#conference@Accepted_contribution||edas@AcceptedPaper -->
 
 
-    <owl:Class rdf:about="http://conference#Abstract">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://sigkdd#submit_until"/>
-                <owl:someValuesFrom rdf:resource="http://sigkdd#Deadline_Abstract_Submission"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Accepted_contribution -->
-
-
-    <owl:Class rdf:about="http://conference#Accepted_contribution">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
-        <owl:disjointWith rdf:resource="http://conference#Rejected_contribution"/>
+    <owl:Class rdf:about="http://conference_edas#conference@Accepted_contribution||edas@AcceptedPaper">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+        <owl:disjointWith rdf:resource="http://conference_edas#conference@Rejected_contribution||edas@RejectedPaper"/>
         <owl:disjointWith rdf:resource="http://edas#ActivePaper"/>
         <owl:disjointWith rdf:resource="http://edas#PendingPaper"/>
         <owl:disjointWith rdf:resource="http://edas#PublishedPaper"/>
@@ -917,207 +905,154 @@
     
 
 
-    <!-- http://conference#Committee -->
+    <!-- http://conference_edas#conference@Conference_document||edas@Document -->
 
 
-    <owl:Class rdf:about="http://conference#Committee"/>
-    
-
-
-    <!-- http://conference#Conference_document -->
-
-
-    <owl:Class rdf:about="http://conference#Conference_document">
-        <owl:disjointWith rdf:resource="http://conference#Conference_part"/>
-        <owl:disjointWith rdf:resource="http://conference#Conference_volume"/>
-        <owl:disjointWith rdf:resource="http://conference#Organization"/>
-        <owl:disjointWith rdf:resource="http://conference#Person"/>
-        <owl:disjointWith rdf:resource="http://conference#Topic"/>
+    <owl:Class rdf:about="http://conference_edas#conference@Conference_document||edas@Document">
         <owl:disjointWith rdf:resource="http://edas#Call"/>
         <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
         <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
         <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Conference_fees -->
+    <!-- http://conference_edas#conference@Rejected_contribution||edas@RejectedPaper -->
 
 
-    <owl:Class rdf:about="http://conference#Conference_fees"/>
-    
-
-
-    <!-- http://conference#Conference_part -->
-
-
-    <owl:Class rdf:about="http://conference#Conference_part">
-        <owl:disjointWith rdf:resource="http://conference#Conference_volume"/>
-        <owl:disjointWith rdf:resource="http://conference#Organization"/>
-        <owl:disjointWith rdf:resource="http://conference#Person"/>
-        <owl:disjointWith rdf:resource="http://conference#Topic"/>
-        <owl:disjointWith rdf:resource="http://edas#Call"/>
-        <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
-        <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+    <owl:Class rdf:about="http://conference_edas#conference@Rejected_contribution||edas@RejectedPaper">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+        <owl:disjointWith rdf:resource="http://edas#ActivePaper"/>
+        <owl:disjointWith rdf:resource="http://edas#PendingPaper"/>
+        <owl:disjointWith rdf:resource="http://edas#PublishedPaper"/>
+        <owl:disjointWith rdf:resource="http://edas#WithdrawnPaper"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Conference_participant -->
+    <!-- http://conference_edas#conference@Reviewer||edas@Review -->
 
 
-    <owl:Class rdf:about="http://conference#Conference_participant">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    <owl:Class rdf:about="http://conference_edas#conference@Reviewer||edas@Review">
+        <rdfs:subClassOf rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
+        <owl:disjointWith rdf:resource="http://edas#MealMenu"/>
+        <owl:disjointWith rdf:resource="http://edas#Programme"/>
+        <owl:disjointWith rdf:resource="http://edas#SlideSet"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Conference_volume -->
+    <!-- http://conference_edas#conference@Reviewer||edas@Reviewer -->
 
 
-    <owl:Class rdf:about="http://conference#Conference_volume">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas#hasCountry"/>
-                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas#hasTopic"/>
-                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://sigkdd#Name_of_conference"/>
-                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas#manuscriptDueOn"/>
-                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas#paperDueOn"/>
-                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas#registrationDueOn"/>
-                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://sigkdd#End_of_conference"/>
-                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://sigkdd#Start_of_conference"/>
-                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://conference#Organization"/>
-        <owl:disjointWith rdf:resource="http://conference#Paper"/>
-        <owl:disjointWith rdf:resource="http://conference#Person"/>
-        <owl:disjointWith rdf:resource="http://conference#Topic"/>
-        <owl:disjointWith rdf:resource="http://edas#Call"/>
-        <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
-        <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
-        <rdfs:comment>Conference</rdfs:comment>
+    <owl:Class rdf:about="http://conference_edas#conference@Reviewer||edas@Reviewer">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Person||edas@Person"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://edas_confOf#confOf@reviewes||edas@isReviewing"/>
+                        <owl:someValuesFrom rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 
 
-    <!-- http://conference#Invited_speaker -->
+    <!-- http://conference_sigkdd#conference@Abstract||sigkdd@Abstract -->
 
 
-    <owl:Class rdf:about="http://conference#Invited_speaker">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Abstract||sigkdd@Abstract">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://sigkdd#submit_until"/>
+                <owl:someValuesFrom rdf:resource="http://sigkdd#Deadline_Abstract_Submission"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference_sigkdd#conference@Committee||sigkdd@Committee -->
+
+
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+    
+
+
+    <!-- http://conference_sigkdd#conference@Conference_document||sigkdd@Document -->
+
+
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+    
+
+
+    <!-- http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee -->
+
+
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
+    
+
+
+    <!-- http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference -->
+
+
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+    
+
+
+    <!-- http://conference_sigkdd#conference@Invited_speaker||sigkdd@Invited_Speaker -->
+
+
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Invited_speaker||sigkdd@Invited_Speaker">
         <rdfs:subClassOf rdf:resource="http://sigkdd#Speaker"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Organization -->
+    <!-- http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee -->
 
 
-    <owl:Class rdf:about="http://conference#Organization">
-        <owl:disjointWith rdf:resource="http://conference#Person"/>
-        <owl:disjointWith rdf:resource="http://conference#Topic"/>
-        <owl:disjointWith rdf:resource="http://edas#Call"/>
-        <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
-        <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Organizing_committee -->
+    <!-- http://conference_sigkdd#conference@Paper||sigkdd@Paper -->
 
 
-    <owl:Class rdf:about="http://conference#Organizing_committee">
-        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Paper -->
-
-
-    <owl:Class rdf:about="http://conference#Paper">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Paper||sigkdd@Paper">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#submit_until"/>
                 <owl:someValuesFrom rdf:resource="http://sigkdd#Deadline_Paper_Submission"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
-        <owl:disjointWith rdf:resource="http://conference#Review"/>
-        <owl:disjointWith rdf:resource="http://edas#MealMenu"/>
-        <owl:disjointWith rdf:resource="http://edas#Programme"/>
-        <owl:disjointWith rdf:resource="http://edas#SlideSet"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Person -->
+    <!-- http://conference_sigkdd#conference@Person||sigkdd@Person -->
 
 
-    <owl:Class rdf:about="http://conference#Person">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Person||sigkdd@Person">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#pay"/>
@@ -1128,51 +1063,30 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#can_stay_in"/>
-                <owl:someValuesFrom rdf:resource="http://sigkdd#Hotel"/>
+                <owl:someValuesFrom rdf:resource="http://sigkdd_edas#edas@AccommodationPlace||sigkdd@Hotel"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://conference#Topic"/>
-        <owl:disjointWith rdf:resource="http://edas#Call"/>
-        <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Program_committee -->
+    <!-- http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee -->
 
 
-    <owl:Class rdf:about="http://conference#Program_committee">
-        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Regular_author -->
+    <!-- http://conference_sigkdd#conference@Regular_author||sigkdd@Author -->
 
 
-    <owl:Class rdf:about="http://conference#Regular_author">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Person"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://edas#hasRelatedDocument"/>
-                        <owl:someValuesFrom rdf:resource="http://conference#Paper"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Regular_author||sigkdd@Author">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#submit"/>
-                <owl:someValuesFrom rdf:resource="http://conference#Paper"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://sigkdd#Speaker"/>
@@ -1182,83 +1096,15 @@
                 <owl:someValuesFrom rdf:resource="http://sigkdd#Deadline_Author_notification"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://edas#SessionChair"/>
-        <owl:disjointWith rdf:resource="http://edas#TPCMember"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#General_Chair"/>
     </owl:Class>
     
 
 
-    <!-- http://conference#Rejected_contribution -->
+    <!-- http://conference_sigkdd#conference@Review||sigkdd@Review -->
 
 
-    <owl:Class rdf:about="http://conference#Rejected_contribution">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
-        <owl:disjointWith rdf:resource="http://edas#ActivePaper"/>
-        <owl:disjointWith rdf:resource="http://edas#PendingPaper"/>
-        <owl:disjointWith rdf:resource="http://edas#PublishedPaper"/>
-        <owl:disjointWith rdf:resource="http://edas#WithdrawnPaper"/>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Review -->
-
-
-    <owl:Class rdf:about="http://conference#Review">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
-        <owl:disjointWith rdf:resource="http://edas#MealMenu"/>
-        <owl:disjointWith rdf:resource="http://edas#Programme"/>
-        <owl:disjointWith rdf:resource="http://edas#SlideSet"/>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Reviewer -->
-
-
-    <owl:Class rdf:about="http://conference#Reviewer">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Person"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://edas#isReviewing"/>
-                        <owl:someValuesFrom rdf:resource="http://conference#Paper"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Topic -->
-
-
-    <owl:Class rdf:about="http://conference#Topic">
-        <owl:disjointWith rdf:resource="http://edas#Call"/>
-        <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
-        <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
-    </owl:Class>
-    
-
-
-    <!-- http://conference#Workshop -->
-
-
-    <owl:Class rdf:about="http://conference#Workshop">
-        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
-        <owl:disjointWith rdf:resource="http://edas#OrganizationalMeeting"/>
-        <owl:disjointWith rdf:resource="http://edas#PaperPresentation"/>
-        <owl:disjointWith rdf:resource="http://edas#TalkEvent"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Review||sigkdd@Review">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1267,20 +1113,10 @@
 
 
     <owl:Class rdf:about="http://edas#AcademiaOrganization">
-        <rdfs:subClassOf rdf:resource="http://conference#Organization"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
         <owl:disjointWith rdf:resource="http://edas#GovernmentOrganization"/>
         <owl:disjointWith rdf:resource="http://edas#IndustryOrganization"/>
         <owl:disjointWith rdf:resource="http://edas#NGO"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#AcademicEvent -->
-
-
-    <owl:Class rdf:about="http://edas#AcademicEvent">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_part"/>
-        <owl:disjointWith rdf:resource="http://edas#NonAcademicEvent"/>
     </owl:Class>
     
 
@@ -1312,7 +1148,7 @@
 
 
     <owl:Class rdf:about="http://edas#ActivePaper">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
         <owl:disjointWith rdf:resource="http://edas#PendingPaper"/>
         <owl:disjointWith rdf:resource="http://edas#PublishedPaper"/>
         <owl:disjointWith rdf:resource="http://edas#WithdrawnPaper"/>
@@ -1324,7 +1160,7 @@
 
 
     <owl:Class rdf:about="http://edas#AntennasTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#CADTopic"/>
         <owl:disjointWith rdf:resource="http://edas#CommunicationTheoryTopic"/>
         <owl:disjointWith rdf:resource="http://edas#CommunicationsTopic"/>
@@ -1372,7 +1208,7 @@
 
 
     <owl:Class rdf:about="http://edas#CADTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#CommunicationTheoryTopic"/>
         <owl:disjointWith rdf:resource="http://edas#CommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerArchitectureTopic"/>
@@ -1402,13 +1238,18 @@
     <owl:Class rdf:about="http://edas#Call">
         <owl:disjointWith rdf:resource="http://edas#ConferenceSession"/>
         <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
         <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -1466,7 +1307,7 @@
 
 
     <owl:Class rdf:about="http://edas#CommunicationTheoryTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#CommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerArchitectureTopic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerNetworksTopic"/>
@@ -1493,7 +1334,7 @@
 
 
     <owl:Class rdf:about="http://edas#CommunicationsTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerArchitectureTopic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerNetworksTopic"/>
         <owl:disjointWith rdf:resource="http://edas#CryptographyTopic"/>
@@ -1519,7 +1360,7 @@
 
 
     <owl:Class rdf:about="http://edas#ComputerArchitectureTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#ComputerNetworksTopic"/>
         <owl:disjointWith rdf:resource="http://edas#CryptographyTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MedicineTopic"/>
@@ -1644,7 +1485,7 @@
 
 
     <owl:Class rdf:about="http://edas#ComputerNetworksTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#CryptographyTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MedicineTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MicroelectronicsTopic"/>
@@ -1678,13 +1519,18 @@
 
     <owl:Class rdf:about="http://edas#ConferenceSession">
         <owl:disjointWith rdf:resource="http://edas#ContactInformation"/>
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
         <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -1693,27 +1539,17 @@
 
 
     <owl:Class rdf:about="http://edas#ContactInformation">
-        <owl:disjointWith rdf:resource="http://edas#Country"/>
         <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#Country -->
-
-
-    <owl:Class rdf:about="http://edas#Country">
-        <owl:disjointWith rdf:resource="http://edas#PersonalHistory"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewForm"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
-        <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
-        <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -1722,7 +1558,7 @@
 
 
     <owl:Class rdf:about="http://edas#CryptographyTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#MedicineTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MicroelectronicsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MobileComputingTopic"/>
@@ -1745,16 +1581,7 @@
 
 
     <owl:Class rdf:about="http://edas#DiningPlace">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Place"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#Excursion -->
-
-
-    <owl:Class rdf:about="http://edas#Excursion">
-        <rdfs:subClassOf rdf:resource="http://edas#SocialEvent"/>
+        <rdfs:subClassOf rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -1772,7 +1599,7 @@
 
 
     <owl:Class rdf:about="http://edas#GovernmentOrganization">
-        <rdfs:subClassOf rdf:resource="http://conference#Organization"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
         <owl:disjointWith rdf:resource="http://edas#IndustryOrganization"/>
         <owl:disjointWith rdf:resource="http://edas#NGO"/>
     </owl:Class>
@@ -1783,7 +1610,7 @@
 
 
     <owl:Class rdf:about="http://edas#IndustryOrganization">
-        <rdfs:subClassOf rdf:resource="http://conference#Organization"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
         <owl:disjointWith rdf:resource="http://edas#NGO"/>
     </owl:Class>
     
@@ -1811,9 +1638,10 @@
 
 
     <owl:Class rdf:about="http://edas#MealMenu">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
         <owl:disjointWith rdf:resource="http://edas#Programme"/>
         <owl:disjointWith rdf:resource="http://edas#SlideSet"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
     </owl:Class>
     
 
@@ -1822,7 +1650,7 @@
 
 
     <owl:Class rdf:about="http://edas#MedicineTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#MicroelectronicsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MobileComputingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MultimediaTopic"/>
@@ -1844,7 +1672,7 @@
 
 
     <owl:Class rdf:about="http://edas#MeetingRoomPlace">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Place"/>
+        <rdfs:subClassOf rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -1853,7 +1681,7 @@
 
 
     <owl:Class rdf:about="http://edas#MicroelectronicsTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#MobileComputingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#MultimediaTopic"/>
         <owl:disjointWith rdf:resource="http://edas#OperatingTopicsystems"/>
@@ -1874,7 +1702,7 @@
 
 
     <owl:Class rdf:about="http://edas#MobileComputingTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#MultimediaTopic"/>
         <owl:disjointWith rdf:resource="http://edas#OperatingTopicsystems"/>
         <owl:disjointWith rdf:resource="http://edas#ParallelAndDistributedComputingTopic"/>
@@ -1894,7 +1722,7 @@
 
 
     <owl:Class rdf:about="http://edas#MultimediaTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#OperatingTopicsystems"/>
         <owl:disjointWith rdf:resource="http://edas#ParallelAndDistributedComputingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#PerformanceTopic"/>
@@ -1913,7 +1741,7 @@
 
 
     <owl:Class rdf:about="http://edas#NGO">
-        <rdfs:subClassOf rdf:resource="http://conference#Organization"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
     </owl:Class>
     
 
@@ -1922,7 +1750,8 @@
 
 
     <owl:Class rdf:about="http://edas#NonAcademicEvent">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_part"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
     </owl:Class>
     
 
@@ -1940,7 +1769,7 @@
 
 
     <owl:Class rdf:about="http://edas#OperatingTopicsystems">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#ParallelAndDistributedComputingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#PerformanceTopic"/>
         <owl:disjointWith rdf:resource="http://edas#PowerlineTransmissionTopic"/>
@@ -1958,9 +1787,10 @@
 
 
     <owl:Class rdf:about="http://edas#OrganizationalMeeting">
-        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
         <owl:disjointWith rdf:resource="http://edas#PaperPresentation"/>
         <owl:disjointWith rdf:resource="http://edas#TalkEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Workshop||edas@Workshop"/>
     </owl:Class>
     
 
@@ -1969,8 +1799,9 @@
 
 
     <owl:Class rdf:about="http://edas#PaperPresentation">
-        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
         <owl:disjointWith rdf:resource="http://edas#TalkEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Workshop||edas@Workshop"/>
     </owl:Class>
     
 
@@ -1979,7 +1810,7 @@
 
 
     <owl:Class rdf:about="http://edas#ParallelAndDistributedComputingTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#PerformanceTopic"/>
         <owl:disjointWith rdf:resource="http://edas#PowerlineTransmissionTopic"/>
         <owl:disjointWith rdf:resource="http://edas#RadioCommunicationsTopic"/>
@@ -1996,7 +1827,7 @@
 
 
     <owl:Class rdf:about="http://edas#PendingPaper">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
         <owl:disjointWith rdf:resource="http://edas#PublishedPaper"/>
         <owl:disjointWith rdf:resource="http://edas#WithdrawnPaper"/>
     </owl:Class>
@@ -2007,7 +1838,7 @@
 
 
     <owl:Class rdf:about="http://edas#PerformanceTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#PowerlineTransmissionTopic"/>
         <owl:disjointWith rdf:resource="http://edas#RadioCommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SatelliteAndSpaceCommunicationsTopic"/>
@@ -2027,7 +1858,13 @@
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2054,7 +1891,7 @@
 
 
     <owl:Class rdf:about="http://edas#PowerlineTransmissionTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#RadioCommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SatelliteAndSpaceCommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SecurityTopic"/>
@@ -2069,7 +1906,7 @@
 
 
     <owl:Class rdf:about="http://edas#Presenter">
-        <rdfs:subClassOf rdf:resource="http://conference#Regular_author"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Author||edas@Author"/>
     </owl:Class>
     
 
@@ -2078,8 +1915,9 @@
 
 
     <owl:Class rdf:about="http://edas#Programme">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
         <owl:disjointWith rdf:resource="http://edas#SlideSet"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
     </owl:Class>
     
 
@@ -2088,7 +1926,7 @@
 
 
     <owl:Class rdf:about="http://edas#PublishedPaper">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
         <owl:disjointWith rdf:resource="http://edas#WithdrawnPaper"/>
     </owl:Class>
     
@@ -2098,7 +1936,7 @@
 
 
     <owl:Class rdf:about="http://edas#RadioCommunicationsTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#SatelliteAndSpaceCommunicationsTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SecurityTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SignalProcessingTopic"/>
@@ -2114,20 +1952,11 @@
     <owl:Class rdf:about="http://edas#RatedPapers">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://conference#has_a_review_expertise"/>
+                <owl:onProperty rdf:resource="http://conference_edas#conference@has_a_review_expertise||edas@hasRating"/>
                 <owl:someValuesFrom rdf:resource="http://edas#ReviewRating"/>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://edas#ActivePaper"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#Reception -->
-
-
-    <owl:Class rdf:about="http://edas#Reception">
-        <rdfs:subClassOf rdf:resource="http://edas#SocialEvent"/>
     </owl:Class>
     
 
@@ -2149,7 +1978,13 @@
         <owl:disjointWith rdf:resource="http://edas#ReviewQuestion"/>
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2160,7 +1995,13 @@
     <owl:Class rdf:about="http://edas#ReviewQuestion">
         <owl:disjointWith rdf:resource="http://edas#ReviewRating"/>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2180,7 +2021,13 @@
             </owl:Class>
         </owl:equivalentClass>
         <owl:disjointWith rdf:resource="http://edas#Sponsorship"/>
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2189,7 +2036,7 @@
 
 
     <owl:Class rdf:about="http://edas#SatelliteAndSpaceCommunicationsTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#SecurityTopic"/>
         <owl:disjointWith rdf:resource="http://edas#SignalProcessingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#TestOnlyTopic"/>
@@ -2202,7 +2049,7 @@
 
 
     <owl:Class rdf:about="http://edas#SecurityTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#SignalProcessingTopic"/>
         <owl:disjointWith rdf:resource="http://edas#TestOnlyTopic"/>
         <owl:disjointWith rdf:resource="http://edas#WirelessCommunicationsTopic"/>
@@ -2214,7 +2061,8 @@
 
 
     <owl:Class rdf:about="http://edas#SessionChair">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Author||edas@Author"/>
     </owl:Class>
     
 
@@ -2223,7 +2071,7 @@
 
 
     <owl:Class rdf:about="http://edas#SignalProcessingTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#TestOnlyTopic"/>
         <owl:disjointWith rdf:resource="http://edas#WirelessCommunicationsTopic"/>
     </owl:Class>
@@ -2237,13 +2085,13 @@
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
                     <owl:Class>
                         <owl:complementOf rdf:resource="http://edas#TwoLevelConference"/>
                     </owl:Class>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://edas#hasMember"/>
-                        <owl:allValuesFrom rdf:resource="http://conference#Person"/>
+                        <owl:allValuesFrom rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -2256,16 +2104,8 @@
 
 
     <owl:Class rdf:about="http://edas#SlideSet">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#SocialEvent -->
-
-
-    <owl:Class rdf:about="http://edas#SocialEvent">
-        <rdfs:subClassOf rdf:resource="http://edas#NonAcademicEvent"/>
+        <rdfs:subClassOf rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
     </owl:Class>
     
 
@@ -2274,16 +2114,13 @@
 
 
     <owl:Class rdf:about="http://edas#Sponsorship">
-        <owl:disjointWith rdf:resource="http://sigkdd#Place"/>
-    </owl:Class>
-    
-
-
-    <!-- http://edas#TPCMember -->
-
-
-    <owl:Class rdf:about="http://edas#TPCMember">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2292,7 +2129,8 @@
 
 
     <owl:Class rdf:about="http://edas#TalkEvent">
-        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Workshop||edas@Workshop"/>
     </owl:Class>
     
 
@@ -2301,7 +2139,7 @@
 
 
     <owl:Class rdf:about="http://edas#TestOnlyTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
         <owl:disjointWith rdf:resource="http://edas#WirelessCommunicationsTopic"/>
     </owl:Class>
     
@@ -2332,14 +2170,14 @@
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference#Conference_volume"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Event||edas@Conference"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://edas#hasMember"/>
-                        <owl:someValuesFrom rdf:resource="http://edas#TPCMember"/>
+                        <owl:someValuesFrom rdf:resource="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
                     </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://edas#hasMember"/>
-                        <owl:allValuesFrom rdf:resource="http://conference#Person"/>
+                        <owl:allValuesFrom rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -2370,7 +2208,7 @@
 
 
     <owl:Class rdf:about="http://edas#WirelessCommunicationsTopic">
-        <rdfs:subClassOf rdf:resource="http://conference#Topic"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
     </owl:Class>
     
 
@@ -2379,7 +2217,220 @@
 
 
     <owl:Class rdf:about="http://edas#WithdrawnPaper">
-        <rdfs:subClassOf rdf:resource="http://conference#Paper"/>
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Author||edas@Author -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Author||edas@Author">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Person||edas@Person"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://edas#hasRelatedDocument"/>
+                        <owl:someValuesFrom rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Member_PC||edas@TPCMember"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Country||edas@Country -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Country||edas@Country">
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@Conference"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Event||edas@Conference -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Event||edas@Conference">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasCountry"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasTopic"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://sigkdd_edas#edas@hasName||sigkdd@Name_of_conference"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#manuscriptDueOn"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#paperDueOn"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#registrationDueOn"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://sigkdd_edas#edas@endDate||sigkdd@End_of_conference"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://sigkdd_edas#edas@startDate||sigkdd@Start_of_conference"/>
+                <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Paper||edas@Paper"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+        <rdfs:comment>Conference</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Event||edas@ConferenceEvent -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Event||edas@ConferenceEvent">
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Organization||edas@Organization"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Member_PC||edas@TPCMember -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Member_PC||edas@TPCMember">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Organization||edas@Organization -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Organization||edas@Organization">
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Paper||edas@Paper -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Paper||edas@Paper">
+        <rdfs:subClassOf rdf:resource="http://conference_edas#conference@Conference_document||edas@Document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Participant||edas@Attendee -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Participant||edas@Attendee">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Person||edas@Person -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Person||edas@Person">
+        <owl:disjointWith rdf:resource="http://edas_confOf#confOf@Topic||edas@Topic"/>
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Reception||edas@Reception -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Reception||edas@Reception">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Social_event||edas@SocialEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Social_event||edas@SocialEvent -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Social_event||edas@SocialEvent">
+        <rdfs:subClassOf rdf:resource="http://edas#NonAcademicEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Topic||edas@Topic -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Topic||edas@Topic">
+        <owl:disjointWith rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Trip||edas@Excursion -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Trip||edas@Excursion">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Social_event||edas@SocialEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Working_event||edas@AcademicEvent -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Working_event||edas@AcademicEvent">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Event||edas@ConferenceEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas_confOf#confOf@Workshop||edas@Workshop -->
+
+
+    <owl:Class rdf:about="http://edas_confOf#confOf@Workshop||edas@Workshop">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Working_event||edas@AcademicEvent"/>
     </owl:Class>
     
 
@@ -2398,7 +2449,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#hold"/>
-                <owl:someValuesFrom rdf:resource="http://conference#Conference_volume"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -2415,7 +2466,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Author_of_paper">
-        <rdfs:subClassOf rdf:resource="http://conference#Regular_author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#award"/>
@@ -2436,7 +2487,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Author_of_paper_student">
-        <rdfs:subClassOf rdf:resource="http://conference#Regular_author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#award"/>
@@ -2474,7 +2525,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Best_Paper_Awards_Committee">
-        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
     </owl:Class>
     
 
@@ -2511,15 +2562,6 @@
 
     <owl:Class rdf:about="http://sigkdd#Bronze_Supporter">
         <rdfs:subClassOf rdf:resource="http://sigkdd#Sponzor"/>
-    </owl:Class>
-    
-
-
-    <!-- http://sigkdd#Conference_hall -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Conference_hall">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Place"/>
     </owl:Class>
     
 
@@ -2567,16 +2609,6 @@
     
 
 
-    <!-- http://sigkdd#General_Chair -->
-
-
-    <owl:Class rdf:about="http://sigkdd#General_Chair">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
-    </owl:Class>
-    
-
-
     <!-- http://sigkdd#Gold_Supporter -->
 
 
@@ -2586,29 +2618,11 @@
     
 
 
-    <!-- http://sigkdd#Hotel -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Hotel">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Place"/>
-    </owl:Class>
-    
-
-
-    <!-- http://sigkdd#Listener -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Listener">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
-    </owl:Class>
-    
-
-
     <!-- http://sigkdd#Main_office -->
 
 
     <owl:Class rdf:about="http://sigkdd#Main_office">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Place"/>
+        <rdfs:subClassOf rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     </owl:Class>
     
 
@@ -2617,7 +2631,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Organizator">
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
     </owl:Class>
     
 
@@ -2631,36 +2645,11 @@
     
 
 
-    <!-- http://sigkdd#Place -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Place"/>
-    
-
-
     <!-- http://sigkdd#Platinum_Supporter -->
 
 
     <owl:Class rdf:about="http://sigkdd#Platinum_Supporter">
         <rdfs:subClassOf rdf:resource="http://sigkdd#Sponzor"/>
-    </owl:Class>
-    
-
-
-    <!-- http://sigkdd#Program_Chair -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Program_Chair">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
-    </owl:Class>
-    
-
-
-    <!-- http://sigkdd#Program_Committee_member -->
-
-
-    <owl:Class rdf:about="http://sigkdd#Program_Committee_member">
-        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
     </owl:Class>
     
 
@@ -2705,7 +2694,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Registration_fee">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_fees"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
     </owl:Class>
     
 
@@ -2725,11 +2714,11 @@
     <owl:Class rdf:about="http://sigkdd#Speaker">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://conference#gives_presentations"/>
-                <owl:someValuesFrom rdf:resource="http://conference#Conference_document"/>
+                <owl:onProperty rdf:resource="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
     </owl:Class>
     
 
@@ -2752,7 +2741,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Sponzor_fee">
-        <rdfs:subClassOf rdf:resource="http://conference#Conference_fees"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
     </owl:Class>
     
 
@@ -2763,6 +2752,68 @@
     <owl:Class rdf:about="http://sigkdd#Webmaster">
         <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
     </owl:Class>
+    
+
+
+    <!-- http://sigkdd_confOf#confOf@Chair_PC||sigkdd@Program_Chair -->
+
+
+    <owl:Class rdf:about="http://sigkdd_confOf#confOf@Chair_PC||sigkdd@Program_Chair">
+        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_confOf#confOf@Member_PC||sigkdd@Program_Committee_member -->
+
+
+    <owl:Class rdf:about="http://sigkdd_confOf#confOf@Member_PC||sigkdd@Program_Committee_member">
+        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_edas#edas@AccommodationPlace||sigkdd@Hotel -->
+
+
+    <owl:Class rdf:about="http://sigkdd_edas#edas@AccommodationPlace||sigkdd@Hotel">
+        <rdfs:subClassOf rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_edas#edas@Attendee||sigkdd@Listener -->
+
+
+    <owl:Class rdf:about="http://sigkdd_edas#edas@Attendee||sigkdd@Listener">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair -->
+
+
+    <owl:Class rdf:about="http://sigkdd_edas#edas@ConferenceChair||sigkdd@General_Chair">
+        <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Person||edas@Person"/>
+        <rdfs:subClassOf rdf:resource="http://sigkdd#Organizator"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_edas#edas@ConferenceVenuePlace||sigkdd@Conference_hall -->
+
+
+    <owl:Class rdf:about="http://sigkdd_edas#edas@ConferenceVenuePlace||sigkdd@Conference_hall">
+        <rdfs:subClassOf rdf:resource="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd_edas#edas@Place||sigkdd@Place -->
+
+
+    <owl:Class rdf:about="http://sigkdd_edas#edas@Place||sigkdd@Place"/>
     
 
 
@@ -2797,7 +2848,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Argentina">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2806,7 +2857,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Armenia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2815,7 +2866,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Australia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2824,7 +2875,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Austria">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2833,7 +2884,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Azerbaijan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2842,7 +2893,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Bahamas">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2851,7 +2902,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Bahrain">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2860,7 +2911,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Bangladesh">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2869,7 +2920,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Belarus">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2878,7 +2929,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Belgium">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2887,7 +2938,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#BosniaAndHerzegovina">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2896,7 +2947,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Botswana">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2905,7 +2956,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Brazil">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2914,7 +2965,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Bulgaria">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2923,7 +2974,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Cambodia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2932,7 +2983,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Canada">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2941,7 +2992,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Chile">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2950,7 +3001,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#China">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2959,7 +3010,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#CocosIslands">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2968,7 +3019,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Colombia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2977,7 +3028,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Croatia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2986,7 +3037,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Cuba">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -2995,7 +3046,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Cyprus">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3004,7 +3055,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#CzechRepublic">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3013,7 +3064,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#DemocraticRepublicOfCongo">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3022,7 +3073,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Denmark">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3031,7 +3082,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Ecuador">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3040,7 +3091,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Egypt">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3049,7 +3100,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Estonia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3058,7 +3109,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Ethiopia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3067,7 +3118,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#EuropeanUnion">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3076,7 +3127,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Finland">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3085,7 +3136,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#France">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3094,7 +3145,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Georgia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3103,7 +3154,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Germany">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3112,7 +3163,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Ghana">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3121,7 +3172,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Greece">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3130,7 +3181,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#HongKong">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3139,7 +3190,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Hungary">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3148,7 +3199,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Iceland">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3157,7 +3208,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#India">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3166,7 +3217,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Indonesia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3175,7 +3226,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Iran">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3184,7 +3235,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Iraq">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3193,7 +3244,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Ireland">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3202,7 +3253,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Israel">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3211,7 +3262,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Italy">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3220,7 +3271,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Japan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3229,7 +3280,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Jordan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3238,7 +3289,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Kenya">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3247,7 +3298,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Korea">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3256,7 +3307,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Kuwait">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3265,7 +3316,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Latvia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3274,7 +3325,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Lebanon">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3283,7 +3334,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Libya">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3292,7 +3343,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Lithuania">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3301,7 +3352,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Luxemburg">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3310,7 +3361,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Macao">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3319,7 +3370,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Macedonia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3328,7 +3379,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Madagascar">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3337,7 +3388,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Malaysia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3346,7 +3397,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Malta">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3355,7 +3406,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Mauritius">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3364,7 +3415,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Mexico">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3373,7 +3424,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Mongolia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3382,7 +3433,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Morocco">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3391,7 +3442,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Nepal">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3400,7 +3451,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Netherlands">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3409,7 +3460,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#NewZealand">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3418,7 +3469,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Nicaragua">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3427,7 +3478,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Nigeria">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3436,7 +3487,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#NorthKorea">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3445,7 +3496,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Norway">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3454,7 +3505,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Oman">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3463,7 +3514,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Pakistan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3472,7 +3523,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Paraguay">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3481,7 +3532,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Peru">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3490,7 +3541,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Philippines">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3499,7 +3550,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Poland">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3508,7 +3559,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Portugal">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3517,7 +3568,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#PuertoRico">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3526,7 +3577,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Qatar">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3535,7 +3586,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Romania">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3544,7 +3595,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Russia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3553,7 +3604,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#SanMarino">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3562,7 +3613,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#SaudiArabia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3571,7 +3622,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Senegal">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3580,7 +3631,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#SerbiaAndMontenegro">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3589,7 +3640,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Singapore">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3598,7 +3649,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Slovakia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3607,7 +3658,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Slovenia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3616,7 +3667,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#SouthAfrica">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3625,7 +3676,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Spain">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3634,7 +3685,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#SriLanka">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3643,7 +3694,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Sweden">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3652,7 +3703,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Switzerland">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3661,7 +3712,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Syria">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3670,7 +3721,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Taiwan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3679,7 +3730,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Tajikistan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3688,7 +3739,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Tanzania">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3697,7 +3748,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Thailand">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3706,7 +3757,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Tunisia">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3715,7 +3766,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Turkey">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3724,7 +3775,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Turkmenistan">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3733,7 +3784,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#UAE">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3742,7 +3793,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#USA">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3751,7 +3802,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Uganda">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3760,7 +3811,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Ukraine">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3769,7 +3820,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#UnitedKingdom">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3778,7 +3829,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Uruguay">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3787,7 +3838,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Venezuela">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3796,7 +3847,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Vietnam">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3805,7 +3856,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Yemen">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 
@@ -3814,7 +3865,7 @@
 
 
     <owl:NamedIndividual rdf:about="http://edas#Zimbabwe">
-        <rdf:type rdf:resource="http://edas#Country"/>
+        <rdf:type rdf:resource="http://edas_confOf#confOf@Country||edas@Country"/>
     </owl:NamedIndividual>
     
 

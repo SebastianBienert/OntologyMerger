@@ -6,6 +6,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MappingProvider {
@@ -44,5 +45,13 @@ public class MappingProvider {
 
     public OAEIMapping getMapping(String name) {
         return _mappings.get(name);
+    }
+
+    public OAEIMappingCollection getMappingCollection(ArrayList<String> names){
+        ArrayList<OAEIMapping> selectedMappings = new ArrayList<>();
+        for(String name : names){
+            selectedMappings.add(_mappings.get(name));
+        }
+        return new OAEIMappingCollection(selectedMappings);
     }
 }

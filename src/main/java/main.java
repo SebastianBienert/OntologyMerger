@@ -118,21 +118,21 @@ public class main {
 
         org.openjdk.jmh.Main.main(args);
 
-        OWLOntologyManager man = OWLManager.createOWLOntologyManager();
-        OAEIMappingParser parser = new OAEIMappingParser();
-
-        try{
-            OAEIMapping mapping = parser.Parse(new File("src/test/resources/cmt-conference.rdf"));
-            OWLOntology cmtOnto = man.loadOntologyFromOntologyDocument(new File("src/test/resources/cmt.owl"));
-            OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/Conference.owl"));
-            ExperimentMeasures measuresEngine = new ExperimentMeasures();
-            TimeMeasures mergingTime = measuresEngine.GetOntologyMergingTime(cmtOnto, confOf, mapping);
-            System.out.println(mergingTime);
-            System.out.println(mergingTime.get_measures());
-        }
-        catch(Exception e){
-            System.out.println(e);
-        }
+//        OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+//        OAEIMappingParser parser = new OAEIMappingParser();
+//
+//        try{
+//            OAEIMapping mapping = parser.Parse(new File("src/test/resources/cmt-conference.rdf"));
+//            OWLOntology cmtOnto = man.loadOntologyFromOntologyDocument(new File("src/test/resources/cmt.owl"));
+//            OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/Conference.owl"));
+//            ExperimentMeasures measuresEngine = new ExperimentMeasures();
+//            TimeMeasures mergingTime = measuresEngine.GetOntologyMergingTime(cmtOnto, confOf, mapping);
+//            System.out.println(mergingTime);
+//            System.out.println(mergingTime.get_measures());
+//        }
+//        catch(Exception e){
+//            System.out.println(e);
+//        }
 
         //blindMerge();
     }

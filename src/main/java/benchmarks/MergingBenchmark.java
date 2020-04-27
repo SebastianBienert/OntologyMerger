@@ -11,6 +11,8 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -36,21 +38,21 @@ public class MergingBenchmark {
                     new MergingSample(
                             ontologies.getOntology("cmt"),
                             ontologies.getOntology("conference"),
-                            mappings.getMapping("cmt-conference")));
+                            mappings.getMappingCollection(new ArrayList(Arrays.asList("cmt-conference")))));
         }
 
-        @Benchmark
-        @BenchmarkMode(Mode.SampleTime)
-        @OutputTimeUnit(TimeUnit.NANOSECONDS)
-        public OWLOntology testMethod(MyState state) throws Exception {
-            MergingSample sample = samples.get(state.mergingSampleKey);
-            OWLOntology mergedOntology = state.merger.Merge(
-                    sample.firstOntology,
-                    sample.secondOntology,
-                    sample.mapping);
-
-            return mergedOntology;
-        }
+//        @Benchmark
+//        @BenchmarkMode(Mode.SampleTime)
+//        @OutputTimeUnit(TimeUnit.NANOSECONDS)
+//        public OWLOntology testMethod(MyState state) throws Exception {
+//            MergingSample sample = samples.get(state.mergingSampleKey);
+//            OWLOntology mergedOntology = state.merger.Merge(
+//                    sample.firstOntology,
+//                    sample.secondOntology,
+//                    sample.mapping);
+//
+//            return mergedOntology;
+//        }
 
 //    @Benchmark
 //    @BenchmarkMode(Mode.SampleTime)
