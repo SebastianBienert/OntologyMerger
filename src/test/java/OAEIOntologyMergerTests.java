@@ -24,10 +24,15 @@ public class OAEIOntologyMergerTests {
             OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/ontologies/Conference.owl"));
             OWLOntology mergedOntology = merger.Merge(cmtOnto, confOf, mapping);
             String xd = mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString();
-            IRI iri = mergedOntology.getOntologyID().getOntologyIRI().get();
+
+            assertEquals("http://cmt_conference", mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString());
+            //ONE OF A MERGED ENTITY
+           // assertTrue(cmtOnto.containsEntityInSignature(IRI.create("http://cmt#Preference")));
+           // assertTrue(confOf.containsEntityInSignature(IRI.create("http://conference#Review_preference")));
+           // assertTrue(mergedOntology.containsEntityInSignature(IRI.create("http://cmt#Preference_conference#Review_preference")));
+
             File file = new File("src/test/resources/result.owl");
             man.saveOntology(mergedOntology, cmtOnto.getFormat(), IRI.create(file.toURI()));
-            //assertEquals(IRI.create("http://cmt_conference"), mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString());
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
         } catch (Exception e) {

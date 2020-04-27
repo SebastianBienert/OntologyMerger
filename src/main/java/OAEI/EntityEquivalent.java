@@ -5,8 +5,8 @@ public class EntityEquivalent{
     private double certainty;
     private double distance;
 
-    public EntityEquivalent(String entityName, double certainty) {
-        this.entityName = entityName;
+    public EntityEquivalent(String entityURL, double certainty) {
+        this.entityName = entityURL.substring(7);
         this.certainty = certainty;
         this.distance = 1 - certainty;
     }

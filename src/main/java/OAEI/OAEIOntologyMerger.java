@@ -4,6 +4,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLEntityRenamer;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,13 +13,16 @@ public class OAEIOntologyMerger {
     public OWLOntology Merge(OWLOntology firstOntology, OWLOntology secondOntology, OAEIMapping mapping) throws Exception {
         OWLOntologyManager ontologyManager = firstOntology.getOWLOntologyManager();
         OWLDataFactory df = ontologyManager.getOWLDataFactory();
-        IRI IOR = IRI.create(firstOntology.getOntologyID().getOntologyIRI().get().getIRIString() + "+" + secondOntology.getOntologyID().getOntologyIRI().get().getFragment());
+        IRI IOR = IRI.create(firstOntology.getOntologyID().getOntologyIRI().get().getIRIString() + "_" + secondOntology.getOntologyID().getOntologyIRI().get().getFragment());
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
         OWLOntology mergedOntology = man.createOntology(IOR);
 
-        Set<OWLAxiom> firstOntologyAxioms = firstOntology.getAxioms();
 
-        final OWLEntityRenamer renamer = new OWLEntityRenamer(ontologyManager, Collections.singleton(secondOntology));
+        ArrayList<OWLOntology> ontologies = new ArrayList<>();
+        ontologies.add(firstOntology);
+        ontologies.add(secondOntology);
+
+        final OWLEntityRenamer renamer = new OWLEntityRenamer(ontologyManager, ontologies);
 
        // secondOntology.axioms().forEach(System.out::println);
         List<String> test = secondOntology.getSignature()
@@ -28,19 +32,29 @@ public class OAEIOntologyMerger {
                 .collect(Collectors.toList());
 
 
-        Map<OWLEntity, IRI> entity2IRIMap = secondOntology.getSignature()
+        Map<OWLEntity, IRI> entity2IRIMapSecond = secondOntology.getSignature()
                 .stream()
                 .filter(x -> !x.isBuiltIn() && mapping.getMapping().containsKey(x.getIRI().toString()))
-                .collect(Collectors.toMap(x -> x, x -> IRI.create(mapping.getMapping().get(x.getIRI().toString()).get(0).getEntityName())));
+                .collect(Collectors.toMap(
+                        x -> x,
+                        x -> IRI.create(mapping.getMappedEntityName(x.getIRI().toString()))));
 
-        if(entity2IRIMap.isEmpty()){
+        Map<OWLEntity, IRI> entity2IRIMapFirst = firstOntology.getSignature()
+                .stream()
+                .filter(x -> !x.isBuiltIn() && mapping.getMapping().containsKey(x.getIRI().toString()))
+                .collect(Collectors.toMap(
+                        x -> x,
+                        x -> IRI.create(mapping.getMappedEntityName(x.getIRI().toString()))));
+
+        if(entity2IRIMapSecond.isEmpty()){
             throw new Exception("Empty mapping");
         }
-        secondOntology.applyChanges(renamer.changeIRI(entity2IRIMap));
+        secondOntology.applyChanges(renamer.changeIRI(entity2IRIMapSecond));
+        firstOntology.applyChanges(renamer.changeIRI(entity2IRIMapFirst));
 
         //secondOntology.axioms().forEach(System.out::println);
 
-        mergedOntology.addAxioms(firstOntologyAxioms);
+        mergedOntology.addAxioms(firstOntology.getAxioms());
         mergedOntology.addAxioms(secondOntology.getAxioms());
 
 
