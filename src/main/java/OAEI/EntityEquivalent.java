@@ -1,3 +1,5 @@
+package OAEI;
+
 public class EntityEquivalent{
     private String entityName;
     private double certainty;
@@ -20,4 +22,6 @@ public class EntityEquivalent{
     public double getDistance() {
         return distance;
     }
+
+
 }

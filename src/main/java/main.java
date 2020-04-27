@@ -1,4 +1,13 @@
-import org.eclipse.rdf4j.model.vocabulary.OWL;
+import OAEI.MappingProvider;
+import OAEI.OAEIMapping;
+import OAEI.OAEIMappingParser;
+import OAEI.OntologyProvider;
+import benchmarks.MergingBenchmark;
+import benchmarks.MergingSample;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.semanticweb.owlapi.io.StringDocumentSource;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLEntityRenamer;
@@ -6,6 +15,7 @@ import org.semanticweb.owlapi.util.OWLOntologyMerger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class main {
@@ -95,8 +105,36 @@ public class main {
 //        }
     }
 
-    public static void main(String[] args){
-        blindMerge();
+    public static void main(String[] args) throws Exception {
+//        MergingSample sample = new MergingSample("cmt", "conference", "cmt-conference");
+//
+//        Options opt = new OptionsBuilder()
+//                .include(MergingBenchmark.class.getSimpleName())
+//                .param("mergingSample", sample)
+//                .build();
+//
+//
+//        new Runner(opt).run();
+
+        org.openjdk.jmh.Main.main(args);
+
+        OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+        OAEIMappingParser parser = new OAEIMappingParser();
+
+        try{
+            OAEIMapping mapping = parser.Parse(new File("src/test/resources/cmt-conference.rdf"));
+            OWLOntology cmtOnto = man.loadOntologyFromOntologyDocument(new File("src/test/resources/cmt.owl"));
+            OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/Conference.owl"));
+            ExperimentMeasures measuresEngine = new ExperimentMeasures();
+            TimeMeasures mergingTime = measuresEngine.GetOntologyMergingTime(cmtOnto, confOf, mapping);
+            System.out.println(mergingTime);
+            System.out.println(mergingTime.get_measures());
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+
+        //blindMerge();
     }
 
     private static void blindMerge(){

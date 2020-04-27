@@ -1,0 +1,2641 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://conference#"
+     xml:base="http://conference"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://conference+confOf"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://confOf#dealsWith -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#dealsWith">
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://edas#Topic"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#employedBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#employedBy">
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://edas#Organization"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#expertOn -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#expertOn">
+        <rdfs:domain rdf:resource="http://edas#TPCMember"/>
+        <rdfs:range rdf:resource="http://edas#Topic"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#follows -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#follows">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://confOf#Administrative_event"/>
+        <rdfs:range rdf:resource="http://confOf#Administrative_event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#hasAdministrativeEvent -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#hasAdministrativeEvent">
+        <rdfs:domain rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:range rdf:resource="http://confOf#Administrative_event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#hasCity -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#hasCity">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#Organization"/>
+                    <rdf:Description rdf:about="http://edas#Person"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://confOf#City"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#hasCountry -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#hasCountry">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#Organization"/>
+                    <rdf:Description rdf:about="http://edas#Person"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://edas#Country"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#parallel_with -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#parallel_with">
+        <owl:inverseOf rdf:resource="http://confOf#parallel_with"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://confOf#Administrative_event"/>
+        <rdfs:range rdf:resource="http://confOf#Administrative_event"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#studyAt -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#studyAt">
+        <rdfs:domain rdf:resource="http://confOf#Scholar"/>
+        <rdfs:range rdf:resource="http://confOf#University"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#belong_to_a_conference_volume -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#belong_to_a_conference_volume">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#belongs_to_a_review_reference -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#belongs_to_a_review_reference">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Topic"/>
+        <rdfs:range rdf:resource="http://conference#Review_preference"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#belongs_to_reviewers -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#belongs_to_reviewers">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Review_expertise"/>
+                    <rdf:Description rdf:about="http://conference#Review_preference"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://conference#Reviewer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#contributes -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#contributes">
+        <owl:inverseOf rdf:resource="http://conference#has_authors"/>
+        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:range rdf:resource="http://conference#Conference_document"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#gives_presentations -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#gives_presentations">
+        <rdfs:domain rdf:resource="http://conference#Active_conference_participant"/>
+        <rdfs:range rdf:resource="http://conference#Presentation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_committee_chair -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_committee_chair">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_members"/>
+        <owl:inverseOf rdf:resource="http://conference#was_a_committee_chair_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Committee"/>
+        <rdfs:range rdf:resource="http://conference#Chair"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_committee_co-chair -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_committee_co-chair">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_members"/>
+        <owl:inverseOf rdf:resource="http://conference#was_a_committe_co-chair_of"/>
+        <rdfs:domain rdf:resource="http://conference#Committee"/>
+        <rdfs:range rdf:resource="http://conference#Co-chair"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_commtitee -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_commtitee">
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_program_committee -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_program_committee">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
+        <owl:inverseOf rdf:resource="http://conference#was_a_program_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Program_committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_publisher -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_publisher">
+        <owl:inverseOf rdf:resource="http://conference#issues"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_proceedings"/>
+        <rdfs:range rdf:resource="http://conference#Publisher"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_review -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_review">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Reviewed_contribution"/>
+        <rdfs:range rdf:resource="http://conference#Review"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_review_expertise -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_review_expertise">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Submitted_contribution"/>
+        <rdfs:range rdf:resource="http://conference#Review_expertise"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_review_reference_or_expertise -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_review_reference_or_expertise">
+        <owl:inverseOf rdf:resource="http://conference#belongs_to_reviewers"/>
+        <rdfs:domain rdf:resource="http://conference#Reviewer"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Review_expertise"/>
+                    <rdf:Description rdf:about="http://conference#Review_preference"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_steering_committee -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_steering_committee">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
+        <owl:inverseOf rdf:resource="http://conference#was_a_steering_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Steering_committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_submitted_contribution -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_submitted_contribution">
+        <owl:inverseOf rdf:resource="http://conference#has_a_review_expertise"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Review_expertise"/>
+        <rdfs:range rdf:resource="http://conference#Submitted_contribution"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_topic_or_a_submission_contribution -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_topic_or_a_submission_contribution">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Review_preference"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Submitted_contribution"/>
+                    <rdf:Description rdf:about="http://conference#Topic"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_track-workshop-tutorial_chair -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_track-workshop-tutorial_chair">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:range rdf:resource="http://conference#Track-workshop_chair"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_a_track-workshop-tutorial_topic -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_a_track-workshop-tutorial_topic">
+        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:domain rdf:resource="http://edas#AcademicEvent"/>
+        <rdfs:range rdf:resource="http://conference#Topic"/>
+        <rdfs:range rdf:resource="http://edas#Topic"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_an_abstract -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_an_abstract">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Paper"/>
+                    <rdf:Description rdf:about="http://conference#Poster"/>
+                    <rdf:Description rdf:about="http://conference#Presentation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://conference#Abstract"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_an_organizing_committee -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_an_organizing_committee">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
+        <owl:inverseOf rdf:resource="http://conference#was_an_organizing_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Organizing_committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_authors -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_authors">
+        <rdfs:domain rdf:resource="http://conference#Conference_document"/>
+        <rdfs:range rdf:resource="http://conference#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_been_assigned_a_review_reference -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_been_assigned_a_review_reference">
+        <owl:inverseOf rdf:resource="http://conference#has_a_topic_or_a_submission_contribution"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Submitted_contribution"/>
+                    <rdf:Description rdf:about="http://conference#Topic"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://conference#Review_preference"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_contributions -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_contributions">
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Conference_contribution"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_important_dates -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_important_dates">
+        <owl:inverseOf rdf:resource="http://conference#belong_to_a_conference_volume"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Important_dates"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_members -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_members">
+        <rdfs:domain rdf:resource="http://conference#Committee"/>
+        <rdfs:range rdf:resource="http://conference#Committee_member"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_parts -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_parts">
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_tracks -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_tracks">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Track"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_tutorials -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_tutorials">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Tutorial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#has_workshops -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#has_workshops">
+        <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://conference#Workshop"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#invited_by -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#invited_by">
+        <owl:inverseOf rdf:resource="http://conference#invites_co-reviewers"/>
+        <rdfs:domain rdf:resource="http://conference#Reviewer"/>
+        <rdfs:range rdf:resource="http://conference#Reviewer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#invites_co-reviewers -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#invites_co-reviewers">
+        <rdfs:domain rdf:resource="http://conference#Reviewer"/>
+        <rdfs:range rdf:resource="http://conference#Reviewer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#is_a_topis_of_conference_parts -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_a_topis_of_conference_parts">
+        <owl:inverseOf rdf:resource="http://conference#has_a_track-workshop-tutorial_topic"/>
+        <rdfs:domain rdf:resource="http://conference#Topic"/>
+        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#is_given_by -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_given_by">
+        <owl:inverseOf rdf:resource="http://conference#gives_presentations"/>
+        <rdfs:domain rdf:resource="http://conference#Presentation"/>
+        <rdfs:range rdf:resource="http://conference#Active_conference_participant"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#is_part_of_conference_volumes -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_part_of_conference_volumes">
+        <owl:inverseOf rdf:resource="http://conference#has_parts"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_part"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#is_submitted_at -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_submitted_at">
+        <owl:inverseOf rdf:resource="http://conference#has_contributions"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#is_the_1th_part_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_the_1th_part_of">
+        <owl:inverseOf rdf:resource="http://conference#has_an_abstract"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Abstract"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Paper"/>
+                    <rdf:Description rdf:about="http://conference#Poster"/>
+                    <rdf:Description rdf:about="http://conference#Presentation"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#issues -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#issues">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Publisher"/>
+        <rdfs:range rdf:resource="http://conference#Conference_proceedings"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#reviews -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#reviews">
+        <owl:inverseOf rdf:resource="http://conference#has_a_review"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Review"/>
+        <rdfs:range rdf:resource="http://conference#Reviewed_contribution"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_committe_co-chair_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_committe_co-chair_of">
+        <rdfs:subPropertyOf rdf:resource="http://conference#was_a_member_of"/>
+        <rdfs:domain rdf:resource="http://conference#Co-chair"/>
+        <rdfs:range rdf:resource="http://conference#Committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_committee_chair_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_committee_chair_of">
+        <rdfs:subPropertyOf rdf:resource="http://conference#was_a_member_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Chair"/>
+        <rdfs:range rdf:resource="http://conference#Committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_committee_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_committee_of">
+        <owl:inverseOf rdf:resource="http://conference#has_a_commtitee"/>
+        <rdfs:domain rdf:resource="http://conference#Committee"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_member_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_member_of">
+        <owl:inverseOf rdf:resource="http://conference#has_members"/>
+        <rdfs:domain rdf:resource="http://conference#Committee_member"/>
+        <rdfs:range rdf:resource="http://conference#Committee"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_program_committee_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_program_committee_of">
+        <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Program_committee"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_steering_committee_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_steering_committee_of">
+        <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Steering_committee"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_a_track-workshop_chair_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_a_track-workshop_chair_of">
+        <owl:inverseOf rdf:resource="http://conference#has_a_track-workshop-tutorial_chair"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Track-workshop_chair"/>
+        <rdfs:range rdf:resource="http://conference#Conference_part"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://conference#was_an_organizing_committee_of -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#was_an_organizing_committee_of">
+        <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Organizing_committee"/>
+        <rdfs:range rdf:resource="http://conference#Conference_volume"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas#hasRelatedPaper -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#hasRelatedPaper">
+        <rdfs:domain rdf:resource="http://edas#Author"/>
+        <rdfs:range rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas#isReviewing -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#isReviewing">
+        <rdfs:domain rdf:resource="http://edas#TPCMember"/>
+        <rdfs:range rdf:resource="http://conference#Conference_contribution"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas#isWrittenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#isWrittenBy">
+        <owl:inverseOf rdf:resource="http://edas#hasRelatedPaper"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://edas#Author"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://confOf#abstract -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#abstract">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#contactEmail -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#contactEmail">
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#defaultChoice -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#defaultChoice">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#earlyRegistration -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#earlyRegistration">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas#Attendee"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#ends_on -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#ends_on">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas#ConferenceEvent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasFax -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasFax">
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasHomePage -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasHomePage">
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasKeyword -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasKeyword">
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasPhone -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasPhone">
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasPostalCode -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasPostalCode">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#Organization"/>
+                    <rdf:Description rdf:about="http://edas#Person"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasStreet -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasStreet">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#Organization"/>
+                    <rdf:Description rdf:about="http://edas#Person"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasTitle -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasTitle">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasVAT -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasVAT">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>value added tax
+</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#has_short_title -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#has_short_title">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#has_title -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#has_title">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#location -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#location">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>where the event is being held</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#maxChoice -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#maxChoice">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+        <rdfs:comment>confTool
+</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#minChoice -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#minChoice">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#AcademicEvent"/>
+                    <rdf:Description rdf:about="http://edas#SocialEvent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#positiveInteger"/>
+        <rdfs:comment>confTool
+</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#remark -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#remark">
+        <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#starts_on -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#starts_on">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas#ConferenceEvent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_URL -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_URL">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_www"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_date_of_issue -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_date_of_issue">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_document"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_degree -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_degree">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Review_preference"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_location -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_location">
+        <rdfs:domain rdf:resource="http://conference#Conference_volume"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_name -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_name">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Conference"/>
+                    <rdf:Description rdf:about="http://conference#Conference_part"/>
+                    <rdf:Description rdf:about="http://conference#Conference_proceedings"/>
+                    <rdf:Description rdf:about="http://conference#Publisher"/>
+                    <rdf:Description rdf:about="http://conference#Topic"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_a_volume -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_a_volume">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_proceedings"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_an_ISBN -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_an_ISBN">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Conference_proceedings"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_an_email -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_an_email">
+        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_an_expertise -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_an_expertise">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Review_expertise"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>high</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>low</rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                        <rdf:first>medium</rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first>very high</rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_gender -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_gender">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:range>
+            <rdfs:Datatype>
+                <owl:oneOf>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                        <rdf:first>female</rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                <rdf:first>male</rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </owl:oneOf>
+            </rdfs:Datatype>
+        </rdfs:range>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_the_first_name -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_the_first_name">
+        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#has_the_last_name -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#has_the_last_name">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_a_date_of_acceptance_announcement -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_a_date_of_acceptance_announcement">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_a_date_of_camera_ready_paper_submission -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_a_date_of_camera_ready_paper_submission">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_a_full_paper_submission_date -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_a_full_paper_submission_date">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_a_starting_date -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_a_starting_date">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_an_abstract_submission_date -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_an_abstract_submission_date">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://conference#is_an_ending_date -->
+
+
+    <owl:DatatypeProperty rdf:about="http://conference#is_an_ending_date">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://conference#Important_dates"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://edas#hasFirstName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas#hasFirstName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>involved middle name</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://edas#hasLastName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas#hasLastName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://sigkdd#E-mail -->
+
+
+    <owl:DatatypeProperty rdf:about="http://sigkdd#E-mail">
+        <rdfs:domain rdf:resource="http://edas#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://confOf#Administrative_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Administrative_event">
+        <rdfs:subClassOf rdf:resource="http://edas#ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#AcademicEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#SocialEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Administrator -->
+
+
+    <owl:Class rdf:about="http://confOf#Administrator">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Assistant -->
+
+
+    <owl:Class rdf:about="http://confOf#Assistant">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Banquet -->
+
+
+    <owl:Class rdf:about="http://confOf#Banquet">
+        <rdfs:subClassOf rdf:resource="http://edas#SocialEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#Excursion"/>
+        <owl:disjointWith rdf:resource="http://edas#Reception"/>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Camera_Ready_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Camera_Ready_event">
+        <rdfs:subClassOf rdf:resource="http://confOf#Administrative_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Registration_of_participants_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Reviewing_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Reviewing_results_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Submission_event"/>
+        <rdfs:comment>Final upload of accepted contributions</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#City -->
+
+
+    <owl:Class rdf:about="http://confOf#City">
+        <owl:disjointWith rdf:resource="http://conference#Conference_contribution"/>
+        <owl:disjointWith rdf:resource="http://edas#ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#Organization"/>
+        <owl:disjointWith rdf:resource="http://edas#Person"/>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Company -->
+
+
+    <owl:Class rdf:about="http://confOf#Company">
+        <rdfs:subClassOf rdf:resource="http://edas#Organization"/>
+        <owl:disjointWith rdf:resource="http://confOf#University"/>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Member -->
+
+
+    <owl:Class rdf:about="http://confOf#Member">
+        <rdfs:subClassOf rdf:resource="http://edas#Attendee"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Registration_of_participants_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Registration_of_participants_event">
+        <rdfs:subClassOf rdf:resource="http://confOf#Administrative_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Reviewing_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Reviewing_results_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Submission_event"/>
+        <rdfs:comment>Registration of new ConfTool users</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Regular -->
+
+
+    <owl:Class rdf:about="http://confOf#Regular">
+        <rdfs:subClassOf rdf:resource="http://edas#Attendee"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Reviewing_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Reviewing_event">
+        <rdfs:subClassOf rdf:resource="http://confOf#Administrative_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Reviewing_results_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Submission_event"/>
+        <rdfs:comment>Reviewing procedure for submitted contributions</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Reviewing_results_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Reviewing_results_event">
+        <rdfs:subClassOf rdf:resource="http://confOf#Administrative_event"/>
+        <owl:disjointWith rdf:resource="http://confOf#Submission_event"/>
+        <rdfs:comment>Results of the reviewing procedures, accessable to authors</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Scholar -->
+
+
+    <owl:Class rdf:about="http://confOf#Scholar">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#studyAt"/>
+                <owl:someValuesFrom rdf:resource="http://confOf#University"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#studyAt"/>
+                <owl:allValuesFrom rdf:resource="http://confOf#University"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>price category - scholar</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Science_Worker -->
+
+
+    <owl:Class rdf:about="http://confOf#Science_Worker">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>price category - science worker</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Short_paper -->
+
+
+    <owl:Class rdf:about="http://confOf#Short_paper">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contribution"/>
+        <owl:disjointWith rdf:resource="http://conference#Poster"/>
+        <owl:disjointWith rdf:resource="http://edas#Paper"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Student -->
+
+
+    <owl:Class rdf:about="http://confOf#Student">
+        <rdfs:subClassOf rdf:resource="http://edas#Attendee"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Submission_event -->
+
+
+    <owl:Class rdf:about="http://confOf#Submission_event">
+        <rdfs:subClassOf rdf:resource="http://confOf#Administrative_event"/>
+        <rdfs:comment>Submission of contributions</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#University -->
+
+
+    <owl:Class rdf:about="http://confOf#University">
+        <rdfs:subClassOf rdf:resource="http://edas#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://confOf#Volunteer -->
+
+
+    <owl:Class rdf:about="http://confOf#Volunteer">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Abstract -->
+
+
+    <owl:Class rdf:about="http://conference#Abstract">
+        <rdfs:subClassOf rdf:resource="http://conference#Extended_abstract"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Accepted_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Accepted_contribution">
+        <rdfs:subClassOf rdf:resource="http://conference#Reviewed_contribution"/>
+        <owl:disjointWith rdf:resource="http://conference#Rejected_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Active_conference_participant -->
+
+
+    <owl:Class rdf:about="http://conference#Active_conference_participant">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contributor"/>
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_participant"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Invited_speaker"/>
+                    <rdf:Description rdf:about="http://conference#Regular_author"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://conference#Passive_conference_participant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Call_for_paper -->
+
+
+    <owl:Class rdf:about="http://conference#Call_for_paper">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Call_for_participation -->
+
+
+    <owl:Class rdf:about="http://conference#Call_for_participation">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Camera_ready_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Camera_ready_contribution">
+        <rdfs:subClassOf rdf:resource="http://conference#Accepted_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Chair -->
+
+
+    <owl:Class rdf:about="http://conference#Chair">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#was_a_committee_chair_of"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Committee"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Committee_member"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Co-chair -->
+
+
+    <owl:Class rdf:about="http://conference#Co-chair">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#was_a_committe_co-chair_of"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Committee"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Committee_member"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Committee -->
+
+
+    <owl:Class rdf:about="http://conference#Committee">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Organizing_committee"/>
+                    <rdf:Description rdf:about="http://conference#Program_committee"/>
+                    <rdf:Description rdf:about="http://conference#Steering_committee"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Committee_member -->
+
+
+    <owl:Class rdf:about="http://conference#Committee_member">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#was_a_member_of"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Committee"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference -->
+
+
+    <owl:Class rdf:about="http://conference#Conference"/>
+    
+
+
+    <!-- http://conference#Conference_announcement -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_announcement">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_applicant -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_applicant">
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_contribution">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Invited_talk"/>
+                    <rdf:Description rdf:about="http://conference#Poster"/>
+                    <rdf:Description rdf:about="http://conference#Regular_contribution"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Presentation"/>
+                    <rdf:Description rdf:about="http://conference#Written_contribution"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#dealsWith"/>
+                <owl:someValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#dealsWith"/>
+                <owl:allValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#contactEmail"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasKeyword"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#abstract"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasTitle"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://edas#ConferenceEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#Country"/>
+        <owl:disjointWith rdf:resource="http://edas#Organization"/>
+        <owl:disjointWith rdf:resource="http://edas#Person"/>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+        <rdfs:comment xml:lang="en">confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_contributor -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_contributor">
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_document -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_document"/>
+    
+
+
+    <!-- http://conference#Conference_fees -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_fees"/>
+    
+
+
+    <!-- http://conference#Conference_part -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_part"/>
+    
+
+
+    <!-- http://conference#Conference_participant -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_participant">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Active_conference_participant"/>
+                    <rdf:Description rdf:about="http://conference#Passive_conference_participant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_proceedings -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_proceedings"/>
+    
+
+
+    <!-- http://conference#Conference_volume -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_volume">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Conference_www -->
+
+
+    <owl:Class rdf:about="http://conference#Conference_www">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Contribution_1th-author -->
+
+
+    <owl:Class rdf:about="http://conference#Contribution_1th-author">
+        <rdfs:subClassOf rdf:resource="http://conference#Regular_author"/>
+        <owl:disjointWith rdf:resource="http://conference#Contribution_co-author"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Contribution_co-author -->
+
+
+    <owl:Class rdf:about="http://conference#Contribution_co-author">
+        <rdfs:subClassOf rdf:resource="http://conference#Regular_author"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Early_paid_applicant -->
+
+
+    <owl:Class rdf:about="http://conference#Early_paid_applicant">
+        <rdfs:subClassOf rdf:resource="http://conference#Paid_applicant"/>
+        <owl:disjointWith rdf:resource="http://conference#Late_paid_applicant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Extended_abstract -->
+
+
+    <owl:Class rdf:about="http://conference#Extended_abstract">
+        <rdfs:subClassOf rdf:resource="http://conference#Regular_contribution"/>
+        <owl:disjointWith rdf:resource="http://conference#Paper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Important_dates -->
+
+
+    <owl:Class rdf:about="http://conference#Important_dates"/>
+    
+
+
+    <!-- http://conference#Information_for_participants -->
+
+
+    <owl:Class rdf:about="http://conference#Information_for_participants">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Invited_speaker -->
+
+
+    <owl:Class rdf:about="http://conference#Invited_speaker">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#contributes"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Invited_talk"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contributor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Invited_talk -->
+
+
+    <owl:Class rdf:about="http://conference#Invited_talk">
+        <rdfs:subClassOf rdf:resource="http://conference#Presentation"/>
+        <owl:disjointWith rdf:resource="http://conference#Poster"/>
+        <owl:disjointWith rdf:resource="http://conference#Regular_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Late_paid_applicant -->
+
+
+    <owl:Class rdf:about="http://conference#Late_paid_applicant">
+        <rdfs:subClassOf rdf:resource="http://conference#Paid_applicant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Organization -->
+
+
+    <owl:Class rdf:about="http://conference#Organization"/>
+    
+
+
+    <!-- http://conference#Organizer -->
+
+
+    <owl:Class rdf:about="http://conference#Organizer">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Committee_member"/>
+                    <rdf:Description rdf:about="http://conference#Organization"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Organizing_committee -->
+
+
+    <owl:Class rdf:about="http://conference#Organizing_committee">
+        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
+        <owl:disjointWith rdf:resource="http://conference#Program_committee"/>
+        <owl:disjointWith rdf:resource="http://conference#Steering_committee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Paid_applicant -->
+
+
+    <owl:Class rdf:about="http://conference#Paid_applicant">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Early_paid_applicant"/>
+                    <rdf:Description rdf:about="http://conference#Late_paid_applicant"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Registeered_applicant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Paper -->
+
+
+    <owl:Class rdf:about="http://conference#Paper">
+        <rdfs:subClassOf rdf:resource="http://conference#Regular_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Passive_conference_participant -->
+
+
+    <owl:Class rdf:about="http://conference#Passive_conference_participant">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_participant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Person -->
+
+
+    <owl:Class rdf:about="http://conference#Person"/>
+    
+
+
+    <!-- http://conference#Poster -->
+
+
+    <owl:Class rdf:about="http://conference#Poster">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contribution"/>
+        <owl:disjointWith rdf:resource="http://conference#Regular_contribution"/>
+        <owl:disjointWith rdf:resource="http://edas#Paper"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Presentation -->
+
+
+    <owl:Class rdf:about="http://conference#Presentation">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Program_committee -->
+
+
+    <owl:Class rdf:about="http://conference#Program_committee">
+        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
+        <owl:disjointWith rdf:resource="http://conference#Steering_committee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Publisher -->
+
+
+    <owl:Class rdf:about="http://conference#Publisher"/>
+    
+
+
+    <!-- http://conference#Registeered_applicant -->
+
+
+    <owl:Class rdf:about="http://conference#Registeered_applicant">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_applicant"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Regular_author -->
+
+
+    <owl:Class rdf:about="http://conference#Regular_author">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://conference#Contribution_1th-author"/>
+                            <rdf:Description rdf:about="http://conference#Contribution_co-author"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://conference#contributes"/>
+                        <owl:someValuesFrom rdf:resource="http://conference#Conference_contribution"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contributor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Regular_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Regular_contribution">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Extended_abstract"/>
+                    <rdf:Description rdf:about="http://conference#Paper"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Written_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Rejected_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Rejected_contribution">
+        <rdfs:subClassOf rdf:resource="http://conference#Reviewed_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Review -->
+
+
+    <owl:Class rdf:about="http://conference#Review">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_document"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#has_authors"/>
+                <owl:allValuesFrom rdf:resource="http://conference#Reviewer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Review_expertise -->
+
+
+    <owl:Class rdf:about="http://conference#Review_expertise">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#belongs_to_reviewers"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Reviewer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#has_a_submitted_contribution"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Submitted_contribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Review_preference -->
+
+
+    <owl:Class rdf:about="http://conference#Review_preference">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#belongs_to_reviewers"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Reviewer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#has_a_topic_or_a_submission_contribution"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://conference#Submitted_contribution"/>
+                            <rdf:Description rdf:about="http://conference#Topic"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Reviewed_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Reviewed_contribution">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Accepted_contribution"/>
+                    <rdf:Description rdf:about="http://conference#Rejected_contribution"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Submitted_contribution"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Reviewer -->
+
+
+    <owl:Class rdf:about="http://conference#Reviewer">
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Steering_committee -->
+
+
+    <owl:Class rdf:about="http://conference#Steering_committee">
+        <rdfs:subClassOf rdf:resource="http://conference#Committee"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Submitted_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Submitted_contribution">
+        <rdfs:subClassOf rdf:resource="http://conference#Written_contribution"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Poster"/>
+                    <rdf:Description rdf:about="http://conference#Regular_contribution"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Topic -->
+
+
+    <owl:Class rdf:about="http://conference#Topic"/>
+    
+
+
+    <!-- http://conference#Track -->
+
+
+    <owl:Class rdf:about="http://conference#Track">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_part"/>
+        <owl:disjointWith rdf:resource="http://conference#Tutorial"/>
+        <owl:disjointWith rdf:resource="http://conference#Workshop"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Track-workshop_chair -->
+
+
+    <owl:Class rdf:about="http://conference#Track-workshop_chair">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#was_a_track-workshop_chair_of"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://conference#Track"/>
+                            <rdf:Description rdf:about="http://conference#Workshop"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://conference#Person"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Tutorial -->
+
+
+    <owl:Class rdf:about="http://conference#Tutorial">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_part"/>
+        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+        <owl:disjointWith rdf:resource="http://conference#Workshop"/>
+        <owl:disjointWith rdf:resource="http://edas#Workshop"/>
+        <owl:disjointWith rdf:resource="http://sigkdd#Conference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Workshop -->
+
+
+    <owl:Class rdf:about="http://conference#Workshop">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_part"/>
+    </owl:Class>
+    
+
+
+    <!-- http://conference#Written_contribution -->
+
+
+    <owl:Class rdf:about="http://conference#Written_contribution">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Poster"/>
+                    <rdf:Description rdf:about="http://conference#Regular_contribution"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#AcademicEvent -->
+
+
+    <owl:Class rdf:about="http://edas#AcademicEvent">
+        <rdfs:subClassOf rdf:resource="http://edas#ConferenceEvent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#has_a_track-workshop-tutorial_topic"/>
+                <owl:someValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://conference#has_a_track-workshop-tutorial_topic"/>
+                <owl:allValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#defaultChoice"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#has_title"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#location"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://edas#SocialEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Attendee -->
+
+
+    <owl:Class rdf:about="http://edas#Attendee">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Author -->
+
+
+    <owl:Class rdf:about="http://edas#Author">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasRelatedPaper"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Conference_contribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasRelatedPaper"/>
+                <owl:allValuesFrom rdf:resource="http://conference#Conference_contribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#ConferenceEvent -->
+
+
+    <owl:Class rdf:about="http://edas#ConferenceEvent">
+        <owl:disjointWith rdf:resource="http://edas#Country"/>
+        <owl:disjointWith rdf:resource="http://edas#Organization"/>
+        <owl:disjointWith rdf:resource="http://edas#Person"/>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Country -->
+
+
+    <owl:Class rdf:about="http://edas#Country">
+        <owl:disjointWith rdf:resource="http://edas#Organization"/>
+        <owl:disjointWith rdf:resource="http://edas#Person"/>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Excursion -->
+
+
+    <owl:Class rdf:about="http://edas#Excursion">
+        <rdfs:subClassOf rdf:resource="http://edas#SocialEvent"/>
+        <owl:disjointWith rdf:resource="http://edas#Reception"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Organization -->
+
+
+    <owl:Class rdf:about="http://edas#Organization">
+        <owl:disjointWith rdf:resource="http://edas#Person"/>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Paper -->
+
+
+    <owl:Class rdf:about="http://edas#Paper">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference_contribution"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Person -->
+
+
+    <owl:Class rdf:about="http://edas#Person">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#employedBy"/>
+                <owl:someValuesFrom rdf:resource="http://edas#Organization"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasCity"/>
+                <owl:someValuesFrom rdf:resource="http://confOf#City"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasCountry"/>
+                <owl:someValuesFrom rdf:resource="http://edas#Country"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#employedBy"/>
+                <owl:allValuesFrom rdf:resource="http://edas#Organization"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasPostalCode"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#hasStreet"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://sigkdd#E-mail"/>
+                <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasFirstName"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#hasLastName"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://edas#Topic"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Reception -->
+
+
+    <owl:Class rdf:about="http://edas#Reception">
+        <rdfs:subClassOf rdf:resource="http://edas#SocialEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#SocialEvent -->
+
+
+    <owl:Class rdf:about="http://edas#SocialEvent">
+        <rdfs:subClassOf rdf:resource="http://edas#ConferenceEvent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#defaultChoice"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#has_title"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#location"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#TPCMember -->
+
+
+    <owl:Class rdf:about="http://edas#TPCMember">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#expertOn"/>
+                <owl:someValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#isReviewing"/>
+                <owl:someValuesFrom rdf:resource="http://conference#Conference_contribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://confOf#expertOn"/>
+                <owl:allValuesFrom rdf:resource="http://edas#Topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://edas#isReviewing"/>
+                <owl:allValuesFrom rdf:resource="http://conference#Conference_contribution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Reviewer</rdfs:comment>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Topic -->
+
+
+    <owl:Class rdf:about="http://edas#Topic">
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://edas#Workshop -->
+
+
+    <owl:Class rdf:about="http://edas#Workshop">
+        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+        <owl:disjointWith rdf:resource="http://sigkdd#Conference"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd#Conference -->
+
+
+    <owl:Class rdf:about="http://sigkdd#Conference">
+        <rdfs:subClassOf rdf:resource="http://edas#AcademicEvent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://sigkdd#Program_Chair -->
+
+
+    <owl:Class rdf:about="http://sigkdd#Program_Chair">
+        <rdfs:subClassOf rdf:resource="http://edas#Person"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.12) https://github.com/owlcs/owlapi/ -->
+
+

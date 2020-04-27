@@ -1,14 +1,15 @@
+package OAEI;
+
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLEntityRenamer;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OAEIOntologyMerger {
-    public OWLOntology Merge(OWLOntology firstOntology, OWLOntology secondOntology, OAEIMapping mapping) throws OWLOntologyCreationException {
+    public OWLOntology Merge(OWLOntology firstOntology, OWLOntology secondOntology, OAEIMapping mapping) throws Exception {
         OWLOntologyManager ontologyManager = firstOntology.getOWLOntologyManager();
         OWLDataFactory df = ontologyManager.getOWLDataFactory();
         IRI IOR = IRI.create(firstOntology.getOntologyID().getOntologyIRI().get().getIRIString() + "+" + secondOntology.getOntologyID().getOntologyIRI().get().getFragment());
@@ -20,12 +21,21 @@ public class OAEIOntologyMerger {
         final OWLEntityRenamer renamer = new OWLEntityRenamer(ontologyManager, Collections.singleton(secondOntology));
 
        // secondOntology.axioms().forEach(System.out::println);
+        List<String> test = secondOntology.getSignature()
+                .stream()
+                .filter(x -> !x.isBuiltIn())
+                .map(x -> x.getIRI().toString())
+                .collect(Collectors.toList());
 
 
         Map<OWLEntity, IRI> entity2IRIMap = secondOntology.getSignature()
                 .stream()
                 .filter(x -> !x.isBuiltIn() && mapping.getMapping().containsKey(x.getIRI().toString()))
                 .collect(Collectors.toMap(x -> x, x -> IRI.create(mapping.getMapping().get(x.getIRI().toString()).get(0).getEntityName())));
+
+        if(entity2IRIMap.isEmpty()){
+            throw new Exception("Empty mapping");
+        }
         secondOntology.applyChanges(renamer.changeIRI(entity2IRIMap));
 
         //secondOntology.axioms().forEach(System.out::println);
@@ -78,9 +88,14 @@ public class OAEIOntologyMerger {
     public double CalculateKnwoledgeIncrease(OWLOntology firstOntology, OWLOntology secondOntology, OAEIMapping mapping){
         long firstOnotologyConceptsCount = GetOntologyConceptsCount(firstOntology);
         long secondOnotologyConceptsCount = GetOntologyConceptsCount(secondOntology);
-        int sizeOfMapping = mapping.getMapping().size();
-        double maxDistancesSum = mapping.getMapping().values().stream()
-                .map(x -> x.stream()
+
+        long sizeOfMapping = mapping.getMapping().keySet().stream()
+                .filter(x -> x.contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
+                .count();
+
+        double maxDistancesSum = mapping.getMapping().entrySet().stream()
+                .filter(x -> x.getKey().contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
+                .map(x -> x.getValue().stream()
                     .map(EntityEquivalent::getDistance)
                     .max(Double::compare).orElse(0.0))
                 .mapToDouble(n -> n)
@@ -89,7 +104,7 @@ public class OAEIOntologyMerger {
         long numberOfEquivalents = mapping.getMapping().values().stream()
                 .map(x -> x.stream().count())
                 .mapToLong(x -> x)
-                .sum();
+                .sum() / 2;
 
 
         double konwledgeIncrease = 1 - ((sizeOfMapping - maxDistancesSum) /

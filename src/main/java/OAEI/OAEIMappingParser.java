@@ -1,3 +1,5 @@
+package OAEI;
+
 import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -5,9 +7,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
@@ -72,14 +72,14 @@ public class OAEIMappingParser {
                 hashMapping.put(firstEntity, equivalentList);
             }
 
-//            if(hashMapping.containsKey(secondEntity)){
-//                hashMapping.get(secondEntity).add(new EntityEquivalent(firstEntity, measure));
-//            }
-//            else{
-//                ArrayList<EntityEquivalent> equivalentList = new ArrayList<EntityEquivalent>();
-//                equivalentList.add(new EntityEquivalent(firstEntity, measure));
-//                hashMapping.put(secondEntity, equivalentList);
-//            }
+            if(hashMapping.containsKey(secondEntity)){
+                hashMapping.get(secondEntity).add(new EntityEquivalent(firstEntity, measure));
+            }
+            else{
+                ArrayList<EntityEquivalent> equivalentList = new ArrayList<EntityEquivalent>();
+                equivalentList.add(new EntityEquivalent(firstEntity, measure));
+                hashMapping.put(secondEntity, equivalentList);
+            }
         }
 
         return new OAEIMapping(firstOntologyName.toString(), secondOntologyName, hashMapping);

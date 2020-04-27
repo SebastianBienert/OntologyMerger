@@ -1,3 +1,5 @@
+import OAEI.OAEIMapping;
+import OAEI.OAEIMappingParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -153,7 +155,10 @@ public class OAEIMappingParserTests {
         OAEIMappingParser parser = new OAEIMappingParser();
         try{
             OAEIMapping mapping = parser.Parse(mappingXML);
-            assertEquals(14, mapping.getMapping().size());
+            assertEquals(30, mapping.getMapping().values().stream()
+                    .map(x -> x.stream().count())
+                    .mapToLong(x -> x)
+                    .sum());
             assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
             assertTrue(mapping.getMapping().get("http://cmt#Conference").size() == 2);
         }catch (Exception ex){
@@ -164,11 +169,14 @@ public class OAEIMappingParserTests {
     @Test
     public void GivenXMLMappingFromFileShouldReturnProperMappingObject(){
         OAEIMappingParser parser = new OAEIMappingParser();
-        File file = new File("src/test/resources/cmt-conference.rdf");
+        File file = new File("src/test/resources/mappings/cmt-conference.rdf");
 
         try{
             OAEIMapping mapping = parser.Parse(file);
-            assertEquals(14, mapping.getMapping().size());
+            assertEquals(30, mapping.getMapping().values().stream()
+                    .map(x -> x.stream().count())
+                    .mapToLong(x -> x)
+                    .sum());
             assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
             assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getDistance(), 0.0, 0.001);
             assertTrue(mapping.getMapping().get("http://cmt#Conference").size() == 2);
