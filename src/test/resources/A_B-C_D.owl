@@ -50,13 +50,6 @@
     
 
 
-    <!-- http://A_B_C_D#B@b4__OR__C@c4 -->
-
-
-    <owl:Class rdf:about="http://A_B_C_D#B@b4__OR__C@c4"/>
-    
-
-
     <!-- http://B#b2 -->
 
 

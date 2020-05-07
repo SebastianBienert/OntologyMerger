@@ -123,28 +123,28 @@ public class OAEIOntologyMergerTests {
                                 "B-D"
                         ))))),
                 0.0));
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("A-C"),
-//                        ontologyProvider.getOntology("B-D"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
-//                                "A-B",
-//                                "A-D",
-//                                "B-C",
-//                                "C-D"
-//                        ))))),
-//                0.0));
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("A-D"),
-//                        ontologyProvider.getOntology("B-C"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
-//                                "A-C",
-//                                "A-B",
-//                                "C-D",
-//                                "B-D"
-//                        ))))),
-//                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A-C"),
+                        ontologyProvider.getOntology("B-D"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+                                "A-B",
+                                "A-D",
+                                "B-C",
+                                "C-D"
+                        ))))),
+                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A-D"),
+                        ontologyProvider.getOntology("B-C"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+                                "A-C",
+                                "A-B",
+                                "C-D",
+                                "B-D"
+                        ))))),
+                0.0));
 
         for (Pair<MergingSample, Double> sample : samples) {
             OWLOntology mergedOntology = merger.Merge(
