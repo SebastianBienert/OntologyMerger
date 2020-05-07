@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:owl="http://www.w3.org/2002/07/owl#"
+        xml:base="http://B">
+    <owl:Ontology rdf:about="http://B"/>
+
+    <owl:Class rdf:ID="b1"/>
+    <owl:Class rdf:ID="b2"/>
+    <owl:Class rdf:ID="b3"/>
+    <owl:Class rdf:ID="b4"/>
+</rdf:RDF>
+

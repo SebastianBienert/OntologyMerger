@@ -17,36 +17,30 @@ import static org.junit.jupiter.api.Assertions.*;
 public class OAEIOntologyMergerTests {
 
     @Test
-    public void GivenTwoOntologiesAndMappingShouldGenerateMergedOntology(){
+    public void GivenTwoOntologiesAndMappingShouldGenerateMergedOntology() throws Exception {
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
         OAEIMappingParser parser = new OAEIMappingParser();
         OAEIOntologyMerger merger = new OAEIOntologyMerger();
 
-        try {
-            OAEIMapping mapping = parser.Parse(new File("src/test/resources/mappings/cmt-conference.rdf"));
-            ArrayList<OAEIMapping> mappings = new ArrayList<>();
-            mappings.add(mapping);
-            OAEIMappingCollection mappingsCollection = new OAEIMappingCollection(mappings);
-            OWLOntology cmtOnto = man.loadOntologyFromOntologyDocument(new File("src/test/resources/ontologies/cmt.owl"));
-            OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/ontologies/Conference.owl"));
+        OAEIMapping mapping = parser.Parse(new File("src/test/resources/mappings/cmt-conference.rdf"));
+        ArrayList<OAEIMapping> mappings = new ArrayList<>();
+        mappings.add(mapping);
+        OAEIMappingCollection mappingsCollection = new OAEIMappingCollection(mappings);
+        OWLOntology cmtOnto = man.loadOntologyFromOntologyDocument(new File("src/test/resources/ontologies/cmt.owl"));
+        OWLOntology confOf = man.loadOntologyFromOntologyDocument(new File("src/test/resources/ontologies/Conference.owl"));
 
-            assertTrue(cmtOnto.containsEntityInSignature(IRI.create("http://cmt#Preference")));
-            assertTrue(confOf.containsEntityInSignature(IRI.create("http://conference#Review_preference")));
-            OWLOntology mergedOntology = merger.Merge(cmtOnto, confOf, mappingsCollection);
+        assertTrue(cmtOnto.containsEntityInSignature(IRI.create("http://cmt#Preference")));
+        assertTrue(confOf.containsEntityInSignature(IRI.create("http://conference#Review_preference")));
+        OWLOntology mergedOntology = merger.Merge(cmtOnto, confOf, mappingsCollection);
 
-            assertEquals("http://cmt_conference", mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString());
-            assertTrue(mergedOntology.containsEntityInSignature(IRI.create("http://cmt_conference#cmt@Preference||conference@Review_preference")));
-            File file = new File("src/test/resources/result.owl");
-            man.saveOntology(mergedOntology, cmtOnto.getFormat(), IRI.create(file.toURI()));
-        } catch (OWLOntologyCreationException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        assertEquals("http://cmt_conference", mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString());
+        File file = new File("src/test/resources/result.owl");
+        man.saveOntology(mergedOntology, cmtOnto.getFormat(), IRI.create(file.toURI()));
+        assertTrue(mergedOntology.containsEntityInSignature(IRI.create("http://cmt@Preference__OR__cmt@Review__OR__conference#Review_preference")));
     }
 
     @Test
-    public void GivenOntologiesFromPaperShouldCalculateProperKnowledgeIncrease(){
+    public void GivenOntologiesFromPaperShouldCalculateProperKnowledgeIncrease() {
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
         OAEIMappingParser parser = new OAEIMappingParser();
         OAEIOntologyMerger merger = new OAEIOntologyMerger();
@@ -69,6 +63,112 @@ public class OAEIOntologyMergerTests {
         }
     }
 
+
+    @Test
+    public void TwoStageMerge() throws Exception {
+        OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+        OAEIOntologyMerger merger = new OAEIOntologyMerger();
+        OntologyProvider ontologyProvider = OntologyProvider.FromFiles();
+        MappingProvider mappingProvider = MappingProvider.FromFiles();
+
+        ArrayList<Pair<MergingSample, Double>> samples = new ArrayList<>();
+        //FIRST LEVEL
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("A"),
+//                        ontologyProvider.getOntology("B"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-B"))))),
+//                0.0));
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("C"),
+//                        ontologyProvider.getOntology("D"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("C-D"))))),
+//                0.0));
+//
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("A"),
+//                        ontologyProvider.getOntology("C"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-C"))))),
+//                0.0));
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("B"),
+//                        ontologyProvider.getOntology("D"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-D"))))),
+//                0.0));
+//
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("A"),
+//                        ontologyProvider.getOntology("D"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-D"))))),
+//                0.0));
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("B"),
+//                        ontologyProvider.getOntology("C"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-C"))))),
+//                0.0));
+        //SECOND LEVEL
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A-B"),
+                        ontologyProvider.getOntology("C-D"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+                                "A-C",
+                                "A-D",
+                                "B-C",
+                                "B-D"
+                        ))))),
+                0.0));
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("A-C"),
+//                        ontologyProvider.getOntology("B-D"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+//                                "A-B",
+//                                "A-D",
+//                                "B-C",
+//                                "C-D"
+//                        ))))),
+//                0.0));
+//        samples.add(new Pair<>(
+//                new MergingSample(
+//                        ontologyProvider.getOntology("A-D"),
+//                        ontologyProvider.getOntology("B-C"),
+//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+//                                "A-C",
+//                                "A-B",
+//                                "C-D",
+//                                "B-D"
+//                        ))))),
+//                0.0));
+
+        for (Pair<MergingSample, Double> sample : samples) {
+            OWLOntology mergedOntology = merger.Merge(
+                    sample.getValue0().firstOntology,
+                    sample.getValue0().secondOntology,
+                    sample.getValue0().mappingCollection);
+            String firstName = sample.getValue0().firstOntology.getOntologyID().getOntologyIRI().get().getShortForm();
+            String secondName = sample.getValue0().secondOntology.getOntologyID().getOntologyIRI().get().getShortForm();
+            File file = new File("src/test/resources/" + firstName + "-" + secondName + ".owl");
+            double knwoledgeIncrease = merger.CalculateKnwoledgeIncrease(
+                    sample.getValue0().firstOntology,
+                    sample.getValue0().secondOntology,
+                    sample.getValue0().mappingCollection);
+
+//                assertEquals(java.util.Optional.ofNullable(sample.getValue1()), merger.CalculateKnwoledgeIncrease(
+//                        sample.getValue0().firstOntology,
+//                        sample.getValue0().secondOntology,
+//                        sample.getValue0().mapping));
+            man.saveOntology(mergedOntology, sample.getValue0().firstOntology.getFormat(), IRI.create(file.toURI()));
+            System.out.println("Expected: " + sample.getValue1() + ", actual: " + knwoledgeIncrease);
+        }
+    }
+
+
     @Test
     public void ExperimentReproduction() throws Exception {
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
@@ -77,7 +177,7 @@ public class OAEIOntologyMergerTests {
         MappingProvider mappingProvider = MappingProvider.FromFiles();
 
         ArrayList<Pair<MergingSample, Double>> samples = new ArrayList<>();
-        //FIRST
+       // FIRST
         samples.add(new Pair<>(
                 new MergingSample(
                         ontologyProvider.getOntology("conference"),
@@ -116,19 +216,46 @@ public class OAEIOntologyMergerTests {
                         ontologyProvider.getOntology("edas"),
                         mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("edas-sigkdd"))))),
                 0.9506));
+        //SECOND LEVEL
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("conference-sigkdd"),
+                        ontologyProvider.getOntology("edas-confOf"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+                                "conference-edas",
+                                "conference-confOf",
+                                "confOf-sigkdd",
+                                "edas-sigkdd"
+                        ))))),
+                0.9968));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("conference-edas"),
+                        ontologyProvider.getOntology("sigkdd-confOf"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList(
+                                "conference-sigkdd",
+                                "conference-confOf",
+                                "confOf-edas",
+                                "edas-sigkdd"
+                        ))))),
+                0.9969));
+
         try {
-            for (Pair<MergingSample, Double> sample: samples) {
-                OWLOntology mergedOntology = merger.Merge(
-                        sample.getValue0().firstOntology,
-                        sample.getValue0().secondOntology,
-                        sample.getValue0().mappingCollection);
-                String firstName = sample.getValue0().firstOntology.getOntologyID().getOntologyIRI().get().getShortForm();
-                String secondName = sample.getValue0().secondOntology.getOntologyID().getOntologyIRI().get().getShortForm();
-                File file = new File("src/test/resources/ontologies/" + firstName + "-" + secondName + ".owl");
+            for (Pair<MergingSample, Double> sample : samples) {
                 double knwoledgeIncrease = merger.CalculateKnwoledgeIncrease(
                         sample.getValue0().firstOntology,
                         sample.getValue0().secondOntology,
                         sample.getValue0().mappingCollection);
+
+                OWLOntology mergedOntology = merger.Merge(
+                        sample.getValue0().firstOntology,
+                        sample.getValue0().secondOntology,
+                        sample.getValue0().mappingCollection);
+
+                String firstName = sample.getValue0().firstOntology.getOntologyID().getOntologyIRI().get().getShortForm();
+                String secondName = sample.getValue0().secondOntology.getOntologyID().getOntologyIRI().get().getShortForm();
+                File file = new File("src/test/resources/ontologies/" + firstName + "-" + secondName + ".owl");
+
 
 //                assertEquals(java.util.Optional.ofNullable(sample.getValue1()), merger.CalculateKnwoledgeIncrease(
 //                        sample.getValue0().firstOntology,
@@ -145,3 +272,4 @@ public class OAEIOntologyMergerTests {
     }
 
 }
+

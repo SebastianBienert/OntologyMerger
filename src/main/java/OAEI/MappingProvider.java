@@ -40,6 +40,12 @@ public class MappingProvider {
         mappings.putIfAbsent("ekaw-iasted", parser.Parse(new File("src/test/resources/mappings/ekaw-iasted.rdf")));
         mappings.putIfAbsent("ekaw-sigkdd", parser.Parse(new File("src/test/resources/mappings/ekaw-sigkdd.rdf")));
         mappings.putIfAbsent("iasted-sigkdd", parser.Parse(new File("src/test/resources/mappings/iasted-sigkdd.rdf")));
+        mappings.putIfAbsent("A-B", parser.Parse(new File("src/test/resources/A-B.rdf")));
+        mappings.putIfAbsent("A-C", parser.Parse(new File("src/test/resources/A-C.rdf")));
+        mappings.putIfAbsent("A-D", parser.Parse(new File("src/test/resources/A-D.rdf")));
+        mappings.putIfAbsent("B-C", parser.Parse(new File("src/test/resources/B-C.rdf")));
+        mappings.putIfAbsent("B-D", parser.Parse(new File("src/test/resources/B-D.rdf")));
+        mappings.putIfAbsent("C-D", parser.Parse(new File("src/test/resources/C-D.rdf")));
         return new MappingProvider(mappings);
     }
 

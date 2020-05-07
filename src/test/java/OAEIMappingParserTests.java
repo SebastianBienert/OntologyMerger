@@ -151,38 +151,31 @@ public class OAEIMappingParserTests {
             "\t</rdf:RDF>";
 
     @Test
-    public void GivenXMLMappingFromStringShouldReturnProperMappingObject(){
+    public void GivenXMLMappingFromStringShouldReturnProperMappingObject() throws Exception {
         OAEIMappingParser parser = new OAEIMappingParser();
-        try{
-            OAEIMapping mapping = parser.Parse(mappingXML);
-            assertEquals(30, mapping.getMapping().values().stream()
-                    .map(x -> x.stream().count())
-                    .mapToLong(x -> x)
-                    .sum());
-            assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
-            assertTrue(mapping.getMapping().get("http://cmt#Conference").size() == 2);
-        }catch (Exception ex){
-            System.out.println(ex);
-        }
+        OAEIMapping mapping = parser.Parse(mappingXML);
+        assertEquals(30, mapping.getMapping().values().stream()
+                .map(x -> (long) x.size())
+                .mapToLong(x -> x)
+                .sum());
+        assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
+        assertEquals(2, mapping.getMapping().get("http://cmt#Conference").size());
     }
 
     @Test
-    public void GivenXMLMappingFromFileShouldReturnProperMappingObject(){
+    public void GivenXMLMappingFromFileShouldReturnProperMappingObject() throws Exception {
         OAEIMappingParser parser = new OAEIMappingParser();
         File file = new File("src/test/resources/mappings/cmt-conference.rdf");
 
-        try{
-            OAEIMapping mapping = parser.Parse(file);
-            assertEquals(30, mapping.getMapping().values().stream()
-                    .map(x -> x.stream().count())
-                    .mapToLong(x -> x)
-                    .sum());
-            assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
-            assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getDistance(), 0.0, 0.001);
-            assertTrue(mapping.getMapping().get("http://cmt#Conference").size() == 2);
-        }catch (Exception ex){
-            System.out.println(ex);
-        }
+        OAEIMapping mapping = parser.Parse(file);
+        assertEquals(30, mapping.getMapping().values().stream()
+                .map(x -> x.stream().count())
+                .mapToLong(x -> x)
+                .sum());
+
+        assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getCertainty(), 1.0, 0.001);
+        assertEquals(mapping.getMapping().get("http://cmt#ProgramCommittee").get(0).getDistance(), 0.0, 0.001);
+        assertTrue(mapping.getMapping().get("http://cmt#Conference").size() == 2);
     }
 
 }

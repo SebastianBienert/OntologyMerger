@@ -47,7 +47,7 @@
     <owl:ObjectProperty rdf:about="http://conference#belong_to_a_conference_volume">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="http://conference#Important_dates"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -85,8 +85,8 @@
 
     <owl:ObjectProperty rdf:about="http://conference#contributes">
         <owl:inverseOf rdf:resource="http://conference#has_authors"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:ObjectProperty>
     
 
@@ -98,7 +98,7 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#has_members"/>
         <owl:inverseOf rdf:resource="http://conference#was_a_committee_chair_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
         <rdfs:range rdf:resource="http://conference#Chair"/>
     </owl:ObjectProperty>
     
@@ -110,7 +110,7 @@
     <owl:ObjectProperty rdf:about="http://conference#has_a_committee_co-chair">
         <rdfs:subPropertyOf rdf:resource="http://conference#has_members"/>
         <owl:inverseOf rdf:resource="http://conference#was_a_committe_co-chair_of"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
         <rdfs:range rdf:resource="http://conference#Co-chair"/>
     </owl:ObjectProperty>
     
@@ -120,8 +120,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://conference#has_a_commtitee">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:ObjectProperty>
     
 
@@ -133,8 +133,8 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
         <owl:inverseOf rdf:resource="http://conference#was_a_program_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee"/>
     </owl:ObjectProperty>
     
 
@@ -157,7 +157,7 @@
     <owl:ObjectProperty rdf:about="http://conference#has_a_review">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="http://conference#Reviewed_contribution"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Review||sigkdd@Review"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Review__OR__sigkdd@Review"/>
     </owl:ObjectProperty>
     
 
@@ -198,7 +198,7 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
         <owl:inverseOf rdf:resource="http://conference#was_a_steering_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Steering_committee"/>
     </owl:ObjectProperty>
     
@@ -265,11 +265,11 @@
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://conference#Poster"/>
                     <rdf:Description rdf:about="http://conference#Presentation"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Abstract||sigkdd@Abstract"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Abstract__OR__sigkdd@Abstract"/>
     </owl:ObjectProperty>
     
 
@@ -281,8 +281,8 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#has_a_commtitee"/>
         <owl:inverseOf rdf:resource="http://conference#was_an_organizing_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee"/>
     </owl:ObjectProperty>
     
 
@@ -291,8 +291,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://conference#has_authors">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:ObjectProperty>
     
 
@@ -320,7 +320,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://conference#has_contributions">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Conference_contribution"/>
     </owl:ObjectProperty>
     
@@ -332,7 +332,7 @@
     <owl:ObjectProperty rdf:about="http://conference#has_important_dates">
         <owl:inverseOf rdf:resource="http://conference#belong_to_a_conference_volume"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Important_dates"/>
     </owl:ObjectProperty>
     
@@ -342,7 +342,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://conference#has_members">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
         <rdfs:range rdf:resource="http://conference#Committee_member"/>
     </owl:ObjectProperty>
     
@@ -352,7 +352,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://conference#has_parts">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Conference_part"/>
     </owl:ObjectProperty>
     
@@ -363,7 +363,7 @@
 
     <owl:ObjectProperty rdf:about="http://conference#has_tracks">
         <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Track"/>
     </owl:ObjectProperty>
     
@@ -374,7 +374,7 @@
 
     <owl:ObjectProperty rdf:about="http://conference#has_tutorials">
         <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Tutorial"/>
     </owl:ObjectProperty>
     
@@ -385,7 +385,7 @@
 
     <owl:ObjectProperty rdf:about="http://conference#has_workshops">
         <rdfs:subPropertyOf rdf:resource="http://conference#has_parts"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://conference#Workshop"/>
     </owl:ObjectProperty>
     
@@ -429,7 +429,7 @@
     <owl:ObjectProperty rdf:about="http://conference#is_part_of_conference_volumes">
         <owl:inverseOf rdf:resource="http://conference#has_parts"/>
         <rdfs:domain rdf:resource="http://conference#Conference_part"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -440,7 +440,7 @@
     <owl:ObjectProperty rdf:about="http://conference#is_submitted_at">
         <owl:inverseOf rdf:resource="http://conference#has_contributions"/>
         <rdfs:domain rdf:resource="http://conference#Conference_contribution"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -451,13 +451,13 @@
     <owl:ObjectProperty rdf:about="http://conference#is_the_1th_part_of">
         <owl:inverseOf rdf:resource="http://conference#has_an_abstract"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Abstract||sigkdd@Abstract"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Abstract__OR__sigkdd@Abstract"/>
         <rdfs:range>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://conference#Poster"/>
                     <rdf:Description rdf:about="http://conference#Presentation"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
@@ -482,7 +482,7 @@
     <owl:ObjectProperty rdf:about="http://conference#reviews">
         <owl:inverseOf rdf:resource="http://conference#has_a_review"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Review||sigkdd@Review"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Review__OR__sigkdd@Review"/>
         <rdfs:range rdf:resource="http://conference#Reviewed_contribution"/>
     </owl:ObjectProperty>
     
@@ -494,7 +494,7 @@
     <owl:ObjectProperty rdf:about="http://conference#was_a_committe_co-chair_of">
         <rdfs:subPropertyOf rdf:resource="http://conference#was_a_member_of"/>
         <rdfs:domain rdf:resource="http://conference#Co-chair"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:ObjectProperty>
     
 
@@ -506,7 +506,7 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#was_a_member_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="http://conference#Chair"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:ObjectProperty>
     
 
@@ -516,8 +516,8 @@
 
     <owl:ObjectProperty rdf:about="http://conference#was_a_committee_of">
         <owl:inverseOf rdf:resource="http://conference#has_a_commtitee"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -528,7 +528,7 @@
     <owl:ObjectProperty rdf:about="http://conference#was_a_member_of">
         <owl:inverseOf rdf:resource="http://conference#has_members"/>
         <rdfs:domain rdf:resource="http://conference#Committee_member"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:ObjectProperty>
     
 
@@ -539,8 +539,8 @@
     <owl:ObjectProperty rdf:about="http://conference#was_a_program_committee_of">
         <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -552,7 +552,7 @@
         <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
         <rdfs:domain rdf:resource="http://conference#Steering_committee"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -575,40 +575,31 @@
     <owl:ObjectProperty rdf:about="http://conference#was_an_organizing_committee_of">
         <rdfs:subPropertyOf rdf:resource="http://conference#was_a_committee_of"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://conference_sigkdd#conference@gives_presentations||sigkdd@presentation -->
+    <!-- http://conference_sigkdd#conference@gives_presentations__OR__sigkdd@presentation -->
 
 
-    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@gives_presentations||sigkdd@presentation">
+    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@gives_presentations__OR__sigkdd@presentation">
         <rdfs:domain rdf:resource="http://conference#Active_conference_participant"/>
-        <rdfs:range rdf:resource="http://conference#Presentation"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://conference_sigkdd#conference@is_given_by||sigkdd@presentation -->
-
-
-    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation">
         <rdfs:domain rdf:resource="http://sigkdd#Speaker"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:range rdf:resource="http://conference#Presentation"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://conference_sigkdd#conference@is_given_by||sigkdd@presentationed_by -->
+    <!-- http://conference_sigkdd#conference@is_given_by__OR__sigkdd@presentationed_by -->
 
 
-    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@is_given_by||sigkdd@presentationed_by">
-        <owl:inverseOf rdf:resource="http://conference_sigkdd#conference@gives_presentations||sigkdd@presentation"/>
-        <owl:inverseOf rdf:resource="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation"/>
+    <owl:ObjectProperty rdf:about="http://conference_sigkdd#conference@is_given_by__OR__sigkdd@presentationed_by">
+        <owl:inverseOf rdf:resource="http://conference_sigkdd#conference@gives_presentations__OR__sigkdd@presentation"/>
         <rdfs:domain rdf:resource="http://conference#Presentation"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
         <rdfs:range rdf:resource="http://conference#Active_conference_participant"/>
         <rdfs:range rdf:resource="http://sigkdd#Speaker"/>
     </owl:ObjectProperty>
@@ -638,7 +629,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#can_stay_in">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://sigkdd#Place"/>
     </owl:ObjectProperty>
     
@@ -670,7 +661,7 @@
 
     <owl:ObjectProperty rdf:about="http://sigkdd#hold">
         <rdfs:domain rdf:resource="http://sigkdd#ACM_SIGKDD"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
     </owl:ObjectProperty>
     
 
@@ -680,7 +671,7 @@
 
     <owl:ObjectProperty rdf:about="http://sigkdd#holded_by">
         <owl:inverseOf rdf:resource="http://sigkdd#hold"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://sigkdd#ACM_SIGKDD"/>
     </owl:ObjectProperty>
     
@@ -690,7 +681,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#notification_until">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
         <rdfs:range rdf:resource="http://sigkdd#Deadline_Author_notification"/>
     </owl:ObjectProperty>
     
@@ -700,7 +691,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#obtain">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
         <rdfs:range rdf:resource="http://sigkdd#Award"/>
     </owl:ObjectProperty>
     
@@ -710,7 +701,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#pay">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://sigkdd#Registration_fee"/>
     </owl:ObjectProperty>
     
@@ -722,7 +713,7 @@
     <owl:ObjectProperty rdf:about="http://sigkdd#payed_by">
         <owl:inverseOf rdf:resource="http://sigkdd#pay"/>
         <rdfs:domain rdf:resource="http://sigkdd#Registration_fee"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:ObjectProperty>
     
 
@@ -752,8 +743,8 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#submit">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
-        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
+        <rdfs:range rdf:resource="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
     </owl:ObjectProperty>
     
 
@@ -762,7 +753,7 @@
 
 
     <owl:ObjectProperty rdf:about="http://sigkdd#submit_until">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
         <rdfs:range rdf:resource="http://sigkdd#Deadline"/>
     </owl:ObjectProperty>
     
@@ -796,7 +787,7 @@
 
     <owl:DatatypeProperty rdf:about="http://conference#has_a_date_of_issue">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
     </owl:DatatypeProperty>
     
@@ -817,7 +808,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://conference#has_a_location">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -831,11 +822,11 @@
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://conference#Conference"/>
                     <rdf:Description rdf:about="http://conference#Conference_part"/>
                     <rdf:Description rdf:about="http://conference#Conference_proceedings"/>
                     <rdf:Description rdf:about="http://conference#Publisher"/>
                     <rdf:Description rdf:about="http://conference#Topic"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Conference||sigkdd@Document"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
@@ -910,7 +901,7 @@
 
     <owl:DatatypeProperty rdf:about="http://conference#has_gender">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range>
             <rdfs:Datatype>
                 <owl:oneOf>
@@ -936,7 +927,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://conference#has_the_first_name">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -947,7 +938,7 @@
 
     <owl:DatatypeProperty rdf:about="http://conference#has_the_last_name">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1019,11 +1010,11 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@has_an_email||sigkdd@E-mail -->
+    <!-- http://conference_sigkdd#conference@has_an_email__OR__sigkdd@E-mail -->
 
 
-    <owl:DatatypeProperty rdf:about="http://conference_sigkdd#conference@has_an_email||sigkdd@E-mail">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+    <owl:DatatypeProperty rdf:about="http://conference_sigkdd#conference@has_an_email__OR__sigkdd@E-mail">
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1033,7 +1024,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#City_of_conference">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1063,7 +1054,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#End_of_conference">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -1073,7 +1064,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#Name">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1083,7 +1074,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#Name_of_conference">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1103,7 +1094,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#Nation">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -1123,7 +1114,7 @@
 
 
     <owl:DatatypeProperty rdf:about="http://sigkdd#Start_of_conference">
-        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+        <rdfs:domain rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
@@ -1160,8 +1151,8 @@
         <rdfs:subClassOf>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Invited_speaker||sigkdd@Invited_Speaker"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Invited_speaker__OR__sigkdd@Invited_Speaker"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
                 </owl:unionOf>
             </owl:Class>
         </rdfs:subClassOf>
@@ -1174,7 +1165,7 @@
 
 
     <owl:Class rdf:about="http://conference#Call_for_paper">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1183,7 +1174,7 @@
 
 
     <owl:Class rdf:about="http://conference#Call_for_participation">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1204,7 +1195,7 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://conference#was_a_committee_chair_of"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://conference#Committee_member"/>
@@ -1219,7 +1210,7 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://conference#was_a_committe_co-chair_of"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://conference#Committee_member"/>
@@ -1234,11 +1225,18 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://conference#was_a_member_of"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
+    
+
+
+    <!-- http://conference#Conference -->
+
+
+    <owl:Class rdf:about="http://conference#Conference"/>
     
 
 
@@ -1246,7 +1244,7 @@
 
 
     <owl:Class rdf:about="http://conference#Conference_announcement">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1255,7 +1253,7 @@
 
 
     <owl:Class rdf:about="http://conference#Conference_applicant">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -1281,7 +1279,7 @@
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1290,7 +1288,7 @@
 
 
     <owl:Class rdf:about="http://conference#Conference_contributor">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -1314,7 +1312,7 @@
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -1330,7 +1328,7 @@
 
 
     <owl:Class rdf:about="http://conference#Conference_www">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1339,7 +1337,7 @@
 
 
     <owl:Class rdf:about="http://conference#Contribution_1th-author">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
         <owl:disjointWith rdf:resource="http://conference#Contribution_co-author"/>
     </owl:Class>
     
@@ -1349,7 +1347,7 @@
 
 
     <owl:Class rdf:about="http://conference#Contribution_co-author">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
     </owl:Class>
     
 
@@ -1369,7 +1367,7 @@
 
     <owl:Class rdf:about="http://conference#Extended_abstract">
         <rdfs:subClassOf rdf:resource="http://conference#Regular_contribution"/>
-        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
     </owl:Class>
     
 
@@ -1385,7 +1383,7 @@
 
 
     <owl:Class rdf:about="http://conference#Information_for_participants">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
@@ -1503,7 +1501,7 @@
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://conference#Extended_abstract"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
@@ -1591,7 +1589,7 @@
 
 
     <owl:Class rdf:about="http://conference#Reviewer">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -1600,9 +1598,9 @@
 
 
     <owl:Class rdf:about="http://conference#Steering_committee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
-        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee"/>
-        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
+        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee"/>
+        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee"/>
     </owl:Class>
     
 
@@ -1659,7 +1657,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -1700,10 +1698,10 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@Abstract||sigkdd@Abstract -->
+    <!-- http://conference_sigkdd#conference@Abstract__OR__sigkdd@Abstract -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Abstract||sigkdd@Abstract">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Abstract__OR__sigkdd@Abstract">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#submit_until"/>
@@ -1711,21 +1709,21 @@
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://conference#Extended_abstract"/>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
 
-    <!-- http://conference_sigkdd#conference@Committee||sigkdd@Committee -->
+    <!-- http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Committee||sigkdd@Committee">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://conference#Steering_committee"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee"/>
-                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee"/>
+                    <rdf:Description rdf:about="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee"/>
                 </owl:unionOf>
             </owl:Class>
         </owl:equivalentClass>
@@ -1733,40 +1731,33 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@Conference_document||sigkdd@Document -->
+    <!-- http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     
 
 
-    <!-- http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee -->
+    <!-- http://conference_sigkdd#conference@Conference_fees__OR__sigkdd@Fee -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_fees__OR__sigkdd@Fee"/>
     
 
 
-    <!-- http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference -->
+    <!-- http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference||sigkdd@Document"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference">
+        <rdfs:subClassOf rdf:resource="http://conference#Conference"/>
     </owl:Class>
     
 
 
-    <!-- http://conference_sigkdd#conference@Conference||sigkdd@Document -->
+    <!-- http://conference_sigkdd#conference@Invited_speaker__OR__sigkdd@Invited_Speaker -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Conference||sigkdd@Document"/>
-    
-
-
-    <!-- http://conference_sigkdd#conference@Invited_speaker||sigkdd@Invited_Speaker -->
-
-
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Invited_speaker||sigkdd@Invited_Speaker">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Invited_speaker__OR__sigkdd@Invited_Speaker">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://conference#contributes"/>
@@ -1779,20 +1770,20 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee -->
+    <!-- http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Organizing_committee||sigkdd@Organizing_Committee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
-        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Organizing_committee__OR__sigkdd@Organizing_Committee">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
+        <owl:disjointWith rdf:resource="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee"/>
     </owl:Class>
     
 
 
-    <!-- http://conference_sigkdd#conference@Paper||sigkdd@Paper -->
+    <!-- http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Paper||sigkdd@Paper">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#submit_until"/>
@@ -1800,15 +1791,15 @@
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://conference#Regular_contribution"/>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
     </owl:Class>
     
 
 
-    <!-- http://conference_sigkdd#conference@Person||sigkdd@Person -->
+    <!-- http://conference_sigkdd#conference@Person__OR__sigkdd@Person -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Person||sigkdd@Person">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Person__OR__sigkdd@Person">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#pay"/>
@@ -1826,19 +1817,19 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee -->
+    <!-- http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Program_committee||sigkdd@Program_Committee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Program_committee__OR__sigkdd@Program_Committee">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:Class>
     
 
 
-    <!-- http://conference_sigkdd#conference@Regular_author||sigkdd@Author -->
+    <!-- http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Regular_author||sigkdd@Author">
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1858,7 +1849,7 @@
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#submit"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Paper||sigkdd@Paper"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Paper__OR__sigkdd@Paper"/>
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://conference#Conference_contributor"/>
@@ -1873,11 +1864,11 @@
     
 
 
-    <!-- http://conference_sigkdd#conference@Review||sigkdd@Review -->
+    <!-- http://conference_sigkdd#conference@Review__OR__sigkdd@Review -->
 
 
-    <owl:Class rdf:about="http://conference_sigkdd#conference@Review||sigkdd@Review">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+    <owl:Class rdf:about="http://conference_sigkdd#conference@Review__OR__sigkdd@Review">
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://conference#has_authors"/>
@@ -1902,7 +1893,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#hold"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_volume||sigkdd@Conference"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_volume__OR__sigkdd@Conference"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1919,7 +1910,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Author_of_paper">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#award"/>
@@ -1940,7 +1931,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Author_of_paper_student">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author||sigkdd@Author"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Regular_author__OR__sigkdd@Author"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://sigkdd#award"/>
@@ -1978,7 +1969,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Best_Paper_Awards_Committee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee||sigkdd@Committee"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Committee__OR__sigkdd@Committee"/>
     </owl:Class>
     
 
@@ -2102,7 +2093,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Listener">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -2120,7 +2111,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Organizator">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -2208,7 +2199,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Registration_fee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees__OR__sigkdd@Fee"/>
     </owl:Class>
     
 
@@ -2228,11 +2219,11 @@
     <owl:Class rdf:about="http://sigkdd#Speaker">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://conference_sigkdd#conference@is_given_by||sigkdd@presentation"/>
-                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_document||sigkdd@Document"/>
+                <owl:onProperty rdf:resource="http://conference_sigkdd#conference@gives_presentations__OR__sigkdd@presentation"/>
+                <owl:someValuesFrom rdf:resource="http://conference_sigkdd#conference@Conference_document__OR__sigkdd@Document"/>
             </owl:Restriction>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person||sigkdd@Person"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Person__OR__sigkdd@Person"/>
     </owl:Class>
     
 
@@ -2255,7 +2246,7 @@
 
 
     <owl:Class rdf:about="http://sigkdd#Sponzor_fee">
-        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees||sigkdd@Fee"/>
+        <rdfs:subClassOf rdf:resource="http://conference_sigkdd#conference@Conference_fees__OR__sigkdd@Fee"/>
     </owl:Class>
     
 

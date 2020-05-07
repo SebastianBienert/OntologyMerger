@@ -19,9 +19,13 @@ public class OAEIOntologyMerger {
         OWLOntology mergedOntology = man.createOntology(IOR);
 
 
+       // firstOntology.addAxiom(new )
+
         ArrayList<OWLOntology> ontologies = new ArrayList<>();
         ontologies.add(firstOntology);
         ontologies.add(secondOntology);
+
+
 
         final OWLEntityRenamer renamer = new OWLEntityRenamer(ontologyManager, ontologies);
 
@@ -29,7 +33,7 @@ public class OAEIOntologyMerger {
         List<String> test = secondOntology.getSignature()
                 .stream()
                 .filter(x -> !x.isBuiltIn())
-                .map(x -> x.getIRI().toString())
+                .map(x -> GetUNescapedURIString(x.getIRI().toString()))
                 .collect(Collectors.toList());
 
 
@@ -41,7 +45,7 @@ public class OAEIOntologyMerger {
                         x -> IRI.create(getMappedEntityName(
                                 IOR.getShortForm(),
                                 x.getIRI().toString(),
-                                mappings.get(x.getIRI().toString()).get(0).getEntityName()
+                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList())
                         ))));
 
         Map<OWLEntity, IRI> entity2IRIMapFirst = firstOntology.getSignature()
@@ -52,7 +56,7 @@ public class OAEIOntologyMerger {
                         x -> IRI.create(getMappedEntityName(
                                 IOR.getShortForm(),
                                 x.getIRI().toString(),
-                                mappings.get(x.getIRI().toString()).get(0).getEntityName()
+                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList())
                         ))));
 
         if(entity2IRIMapSecond.isEmpty()){
@@ -107,17 +111,38 @@ public class OAEIOntologyMerger {
         return mergedOntology;
     }
 
-    private String getMappedEntityName(String mergedOntologyName, String firstEntityIRI, String secondEntityIRI){
-        String firstEntityName = firstEntityIRI.substring(7).replace('#', '@');
-        String secondEntityName = secondEntityIRI.replace('#', '@');
+    private String getMappedEntityName(String mergedOntologyName, String firstEntityIRI, List<String> secondEntityIRIs){
+        boolean isEntityFirstLevel = !firstEntityIRI.substring(firstEntityIRI.lastIndexOf('/') + 1, firstEntityIRI.indexOf('#')).contains("_");
+        String firstEntityName = isEntityFirstLevel ? firstEntityIRI.substring(7) : firstEntityIRI.substring(firstEntityIRI.indexOf('#') + 1);
+        ArrayList<String> firstEntityParts = new ArrayList(Arrays.asList(firstEntityName.replace("#", "@").split("__OR__")));
+        List<String> secondEntityParts = secondEntityIRIs.stream().map(x -> x.replace('#', '@')).collect(Collectors.toList());
+
 //        String firstEntityName = key.substring(7).replace('#', '@');
 //        String secondEntityName = this.mapping.get(key).get(0).getEntityName().replace('#', '@');
 
-        ArrayList<String> alphabeticalSort = new ArrayList<>(Arrays.asList(firstEntityName, secondEntityName));
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<String>(Stream.of(firstEntityParts, secondEntityParts)
+                .flatMap(x -> x.stream())
+                .collect(Collectors.toList()));
+
+        ArrayList<String> alphabeticalSort = new ArrayList<String>(linkedHashSet);
         alphabeticalSort.sort(Collator.getInstance());
 
-        String result = "http://" +mergedOntologyName + "#" + alphabeticalSort.get(0) + "||" + alphabeticalSort.get(1);
+        String result = "http://" + mergedOntologyName + "#";
+        for(int i = 0; i < alphabeticalSort.size(); i++){
+            if(i == 0){
+                result += alphabeticalSort.get(i);
+            }
+            else{
+                result += "__OR__" + alphabeticalSort.get(i);
+            }
+
+        }
+
         return result;
+    }
+
+    private String GetUNescapedURIString(String uri){
+        return uri.replaceAll("%7C", "|");
     }
 
 
@@ -125,8 +150,12 @@ public class OAEIOntologyMerger {
         long firstOnotologyConceptsCount = GetOntologyConceptsCount(firstOntology);
         long secondOnotologyConceptsCount = GetOntologyConceptsCount(secondOntology);
 
-        long sizeOfMapping = mappings.allMapings.keySet().stream()
+        long sizeOfMapping2 = mappings.allMapings.keySet().stream()
                 .filter(x -> x.contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
+                .count();
+
+        long sizeOfMapping = mappings.allMapings.keySet().stream()
+                .filter(x -> firstOntology.classesInSignature().anyMatch(c -> x.contains(c.getIRI().getShortForm())))
                 .count();
 
         double maxDistancesSum = mappings.allMapings.entrySet().stream()
