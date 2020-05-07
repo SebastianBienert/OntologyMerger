@@ -6,7 +6,6 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.util.OWLEntityRenamer;
 
-import java.lang.reflect.Array;
 import java.text.Collator;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,24 +19,11 @@ public class OAEIOntologyMerger {
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
         OWLOntology mergedOntology = man.createOntology(IOR);
 
-
-       // firstOntology.addAxiom(new )
-
         ArrayList<OWLOntology> ontologies = new ArrayList<>();
         ontologies.add(firstOntology);
         ontologies.add(secondOntology);
 
-
-
         final OWLEntityRenamer renamer = new OWLEntityRenamer(ontologyManager, ontologies);
-
-       // secondOntology.axioms().forEach(System.out::println);
-        List<String> test = secondOntology.getSignature()
-                .stream()
-                .filter(x -> !x.isBuiltIn())
-                .map(x -> GetUNescapedURIString(x.getIRI().toString()))
-                .collect(Collectors.toList());
-
 
         Map<OWLEntity, IRI> entity2IRIMapSecond = secondOntology.getSignature()
                 .stream()
@@ -47,9 +33,8 @@ public class OAEIOntologyMerger {
                         x -> IRI.create(getMappedEntityName(
                                 IOR.getShortForm(),
                                 x.getIRI().toString(),
-                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList()),
-                                firstOntology.getSignature())
-                        )));
+                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList())
+                        ))));
 
         Map<OWLEntity, IRI> entity2IRIMapFirst = firstOntology.getSignature()
                 .stream()
@@ -59,8 +44,7 @@ public class OAEIOntologyMerger {
                         x -> IRI.create(getMappedEntityName(
                                 IOR.getShortForm(),
                                 x.getIRI().toString(),
-                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList()),
-                                firstOntology.getSignature()
+                                mappings.get(x.getIRI().toString()).stream().map(m -> m.getEntityName()).collect(Collectors.toList())
                         ))));
 
         if(entity2IRIMapSecond.isEmpty()){
@@ -68,8 +52,6 @@ public class OAEIOntologyMerger {
         }
         secondOntology.applyChanges(renamer.changeIRI(entity2IRIMapSecond));
         firstOntology.applyChanges(renamer.changeIRI(entity2IRIMapFirst));
-
-        //secondOntology.axioms().forEach(System.out::println);
 
         mergedOntology.addAxioms(firstOntology.getAxioms());
         mergedOntology.addAxioms(secondOntology.getAxioms());
@@ -95,75 +77,17 @@ public class OAEIOntologyMerger {
         }
 
         mergedOntology.applyChanges(finalRenamer.changeIRI(entityFInalIRIMapFirst));
-
-//        for (OWLAxiom ax : firstOntologyAxioms) {
-//            List<OWLEntity> owlEntities = ax.getSignature().stream()
-//                    .filter(entity -> mapping.getMapping().containsKey(entity.getIRI().toString()))
-//                    .collect(Collectors.toList());
-//
-//            if (owlEntities.size() > 0) {
-//                //
-//            }
-//            else{
-//                mergedOntology.addAxiom(ax);
-//            }
-//        }
-
-//        List<OWLClass> firstOntologyMappedEntities = firstOntology.getSignature()
-//                .stream()
-//                .filter(x -> x.isOWLClass() && !x.isBuiltIn() && !mapping.getMapping().containsKey(x.getIRI().toString()))
-//                .map(x -> x.asOWLClass())
-//                .collect(Collectors.toList());
-//
-//        for (OWLClass clazz : firstOntologyMappedEntities) {
-//            List<OWLEquivalentClassesAxiom> owlEquivalentClassesAxioms = firstOntology.equivalentClassesAxioms(clazz)
-//                                .collect(Collectors.toList());
-//
-//
-//
-//        }
-
-
-
-//        Stream<OWLEntity> secondOntologyMappedEntities = secondOntology.getSignature()
-//                .stream()
-//                .filter(x -> !x.isBuiltIn() && !mapping.getMapping().containsKey(x.getIRI()));
-//
-//        firstOntology.axioms()
-//
-//       // mergedOntology.addAxioms(firstOntologynotMappedAxioms);
-
         return mergedOntology;
     }
 
-    private String getMappedEntityName(String mergedOntologyName, String firstEntityIRI, List<String> secondEntityIRIs, Set<OWLEntity> secondOntologyEntities) {
+    private String getMappedEntityName(String mergedOntologyName, String firstEntityIRI, List<String> secondEntityIRIs) {
         boolean isEntityFirstLevel = !firstEntityIRI.substring(firstEntityIRI.lastIndexOf('/') + 1, firstEntityIRI.indexOf('#')).contains("_");
         String firstEntityName = isEntityFirstLevel ? firstEntityIRI.substring(7) : firstEntityIRI.substring(firstEntityIRI.indexOf('#') + 1);
         ArrayList<String> firstEntityParts = new ArrayList(Arrays.asList(firstEntityName.replace("#", "@").split("__OR__")));
         List<String> secondEntityParts = secondEntityIRIs.stream().map(x -> x.replace('#', '@')).collect(Collectors.toList());
-
-        List<OWLEntity> owlEntityStream = secondOntologyEntities.stream()
-                .filter(x -> OWLEntityToSplitConceptNames(x)
-                .containsAll(secondEntityIRIs.stream()
-                        .map(e -> e.replace('#', '@'))
-                        .collect(Collectors.toList())))
-                .collect(Collectors.toList());
-
-        if(owlEntityStream.size() > 1){
-            System.out.println("STH WRONG");
-        }
-
-        if(owlEntityStream.size() == 1){
-            secondEntityParts = owlEntityStream.stream().flatMap(x -> OWLEntityToSplitConceptNames(x).stream()).collect(Collectors.toList());
-        }
-
-//        String firstEntityName = key.substring(7).replace('#', '@');
-//        String secondEntityName = this.mapping.get(key).get(0).getEntityName().replace('#', '@');
-
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<String>(Stream.of(firstEntityParts, secondEntityParts)
                 .flatMap(x -> x.stream())
                 .collect(Collectors.toList()));
-
         ArrayList<String> alphabeticalSort = new ArrayList<String>(linkedHashSet);
         alphabeticalSort.sort(Collator.getInstance());
 
@@ -187,10 +111,6 @@ public class OAEIOntologyMerger {
         String entityName = isEntityFirstLevel ? entityIRI.substring(7) : entityIRI.substring(entityIRI.indexOf('#') + 1);
         ArrayList<String> firstEntityParts = new ArrayList(Arrays.asList(entityName.replace("#", "@").split("__OR__")));
         return firstEntityParts;
-    }
-
-    private String GetUNescapedURIString(String uri){
-        return uri.replaceAll("%7C", "|");
     }
 
 
