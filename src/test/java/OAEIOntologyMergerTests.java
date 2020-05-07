@@ -36,7 +36,7 @@ public class OAEIOntologyMergerTests {
         assertEquals("http://cmt_conference", mergedOntology.getOntologyID().getOntologyIRI().get().getIRIString());
         File file = new File("src/test/resources/result.owl");
         man.saveOntology(mergedOntology, cmtOnto.getFormat(), IRI.create(file.toURI()));
-        assertTrue(mergedOntology.containsEntityInSignature(IRI.create("http://cmt@Preference__OR__cmt@Review__OR__conference#Review_preference")));
+        assertTrue(mergedOntology.containsEntityInSignature(IRI.create("http://cmt_conference#cmt@Preference__OR__conference@Review_preference")));
     }
 
     @Test
