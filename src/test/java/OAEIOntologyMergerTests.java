@@ -73,44 +73,44 @@ public class OAEIOntologyMergerTests {
 
         ArrayList<Pair<MergingSample, Double>> samples = new ArrayList<>();
         //FIRST LEVEL
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("A"),
-//                        ontologyProvider.getOntology("B"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-B"))))),
-//                0.0));
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("C"),
-//                        ontologyProvider.getOntology("D"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("C-D"))))),
-//                0.0));
-//
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("A"),
-//                        ontologyProvider.getOntology("C"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-C"))))),
-//                0.0));
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("B"),
-//                        ontologyProvider.getOntology("D"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-D"))))),
-//                0.0));
-//
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("A"),
-//                        ontologyProvider.getOntology("D"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-D"))))),
-//                0.0));
-//        samples.add(new Pair<>(
-//                new MergingSample(
-//                        ontologyProvider.getOntology("B"),
-//                        ontologyProvider.getOntology("C"),
-//                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-C"))))),
-//                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A"),
+                        ontologyProvider.getOntology("B"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-B"))))),
+                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("C"),
+                        ontologyProvider.getOntology("D"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("C-D"))))),
+                0.0));
+
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A"),
+                        ontologyProvider.getOntology("C"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-C"))))),
+                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("B"),
+                        ontologyProvider.getOntology("D"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-D"))))),
+                0.0));
+
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("A"),
+                        ontologyProvider.getOntology("D"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("A-D"))))),
+                0.0));
+        samples.add(new Pair<>(
+                new MergingSample(
+                        ontologyProvider.getOntology("B"),
+                        ontologyProvider.getOntology("C"),
+                        mappingProvider.getMappingCollection(new ArrayList<String>((Arrays.asList("B-C"))))),
+                0.0));
         //SECOND LEVEL
         samples.add(new Pair<>(
                 new MergingSample(

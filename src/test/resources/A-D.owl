@@ -25,7 +25,9 @@
     <!-- http://A#a2 -->
 
 
-    <owl:Class rdf:about="http://A#a2"/>
+    <owl:Class rdf:about="http://A#a2">
+        <rdfs:subClassOf rdf:resource="http://A_D#A@a1__OR__D@d1"/>
+    </owl:Class>
     
 
 
@@ -53,7 +55,9 @@
     <!-- http://D#d2 -->
 
 
-    <owl:Class rdf:about="http://D#d2"/>
+    <owl:Class rdf:about="http://D#d2">
+        <rdfs:subClassOf rdf:resource="http://A_D#A@a1__OR__D@d1"/>
+    </owl:Class>
     
 
 
