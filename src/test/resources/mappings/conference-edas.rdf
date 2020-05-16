@@ -50,14 +50,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='7'>
-									<entity1 rdf:resource='http://conference#has_the_first_name'/>
-									<entity2 rdf:resource='http://edas#hasFirstName'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='8'>
 									<entity1 rdf:resource='http://conference#Conference_part'/>
 									<entity2 rdf:resource='http://edas#ConferenceEvent'/>
@@ -85,22 +77,6 @@
 								<Cell cid='11'>
 									<entity1 rdf:resource='http://conference#Paper'/>
 									<entity2 rdf:resource='http://edas#Paper'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='12'>
-									<entity1 rdf:resource='http://conference#has_a_review_expertise'/>
-									<entity2 rdf:resource='http://edas#hasRating'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='13'>
-									<entity1 rdf:resource='http://conference#has_the_last_name'/>
-									<entity2 rdf:resource='http://edas#hasLastName'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>

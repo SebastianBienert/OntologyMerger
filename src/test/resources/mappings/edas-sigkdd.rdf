@@ -26,25 +26,9 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='2'>
-									<entity1 rdf:resource='http://edas#hasCostAmount'/>
-									<entity2 rdf:resource='http://sigkdd#Price'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='3'>
 									<entity1 rdf:resource='http://edas#Person'/>
 									<entity2 rdf:resource='http://sigkdd#Person'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='4'>
-									<entity1 rdf:resource='http://edas#hasName'/>
-									<entity2 rdf:resource='http://sigkdd#Name_of_conference'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>
@@ -74,14 +58,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='8'>
-									<entity1 rdf:resource='http://edas#startDate'/>
-									<entity2 rdf:resource='http://sigkdd#Start_of_conference'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='9'>
 									<entity1 rdf:resource='http://edas#ConferenceChair'/>
 									<entity2 rdf:resource='http://sigkdd#General_Chair'/>
@@ -93,14 +69,6 @@
 								<Cell cid='10'>
 									<entity1 rdf:resource='http://edas#Conference'/>
 									<entity2 rdf:resource='http://sigkdd#Conference'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='11'>
-									<entity1 rdf:resource='http://edas#endDate'/>
-									<entity2 rdf:resource='http://sigkdd#End_of_conference'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>

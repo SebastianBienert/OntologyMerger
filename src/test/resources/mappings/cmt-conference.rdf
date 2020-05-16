@@ -50,14 +50,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='5'>
-									<entity1 rdf:resource='http://cmt#email'/>
-									<entity2 rdf:resource='http://conference#has_an_email'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='6'>
 									<entity1 rdf:resource='http://cmt#Co-author'/>
 									<entity2 rdf:resource='http://conference#Contribution_co-author'/>
@@ -117,22 +109,6 @@
 								<Cell cid='13'>
 									<entity1 rdf:resource='http://cmt#SubjectArea'/>
 									<entity2 rdf:resource='http://conference#Topic'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>							
-							<map>
-								<Cell cid='16'>
-									<entity1 rdf:resource='http://cmt#assignedByReviewer'/>
-									<entity2 rdf:resource='http://conference#invited_by'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='17'>
-									<entity1 rdf:resource='http://cmt#assignExternalReviewer'/>
-									<entity2 rdf:resource='http://conference#invites_co-reviewers'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>

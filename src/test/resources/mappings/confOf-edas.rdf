@@ -34,25 +34,9 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='3'>
-									<entity1 rdf:resource='http://confOf#reviewes'/>
-									<entity2 rdf:resource='http://edas#isReviewing'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='4'>
 									<entity1 rdf:resource='http://confOf#Organization'/>
 									<entity2 rdf:resource='http://edas#Organization'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='5'>
-									<entity1 rdf:resource='http://confOf#writtenBy'/>
-									<entity2 rdf:resource='http://edas#isWrittenBy'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>
@@ -74,14 +58,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='8'>
-									<entity1 rdf:resource='http://confOf#hasSurname'/>
-									<entity2 rdf:resource='http://edas#hasLastName'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='9'>
 									<entity1 rdf:resource='http://confOf#Workshop'/>
 									<entity2 rdf:resource='http://edas#Workshop'/>
@@ -93,14 +69,6 @@
 								<Cell cid='10'>
 									<entity1 rdf:resource='http://confOf#Author'/>
 									<entity2 rdf:resource='http://edas#Author'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='11'>
-									<entity1 rdf:resource='http://confOf#hasFirstName'/>
-									<entity2 rdf:resource='http://edas#hasFirstName'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>
@@ -157,14 +125,6 @@
 								<Cell cid='18'>
 									<entity1 rdf:resource='http://confOf#Paper'/>
 									<entity2 rdf:resource='http://edas#Paper'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='22'>
-									<entity1 rdf:resource='http://confOf#writes'/>
-									<entity2 rdf:resource='http://edas#hasRelatedPaper'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>

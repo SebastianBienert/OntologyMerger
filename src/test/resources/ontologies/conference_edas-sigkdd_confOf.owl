@@ -204,6 +204,16 @@
     
 
 
+    <!-- http://conference#gives_presentations -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#gives_presentations">
+        <rdfs:domain rdf:resource="http://conference#Active_conference_participant"/>
+        <rdfs:range rdf:resource="http://conference#Presentation"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://conference#has_a_committee_chair -->
 
 
@@ -515,6 +525,17 @@
     
 
 
+    <!-- http://conference#is_given_by -->
+
+
+    <owl:ObjectProperty rdf:about="http://conference#is_given_by">
+        <owl:inverseOf rdf:resource="http://conference#gives_presentations"/>
+        <rdfs:domain rdf:resource="http://conference#Presentation"/>
+        <rdfs:range rdf:resource="http://conference#Active_conference_participant"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://conference#is_part_of_conference_volumes -->
 
 
@@ -734,18 +755,6 @@
     
 
 
-    <!-- http://conference_edas_sigkdd_confOf#conference@gives_presentations__OR__sigkdd@presentation -->
-
-
-    <owl:ObjectProperty rdf:about="http://conference_edas_sigkdd_confOf#conference@gives_presentations__OR__sigkdd@presentation">
-        <rdfs:domain rdf:resource="http://conference#Active_conference_participant"/>
-        <rdfs:domain rdf:resource="http://sigkdd#Speaker"/>
-        <rdfs:range rdf:resource="http://conference#Presentation"/>
-        <rdfs:range rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_document__OR__edas@Document__OR__sigkdd@Document"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://conference_edas_sigkdd_confOf#conference@has_a_track-workshop-tutorial_topic__OR__confOf@hasTopic -->
 
 
@@ -754,19 +763,6 @@
         <rdfs:domain rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_part__OR__confOf@Event__OR__edas@ConferenceEvent"/>
         <rdfs:range rdf:resource="http://conference_edas_sigkdd_confOf#conference@Topic__OR__confOf@Topic__OR__edas@Topic"/>
         <rdfs:comment>confTool</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://conference_edas_sigkdd_confOf#conference@is_given_by__OR__sigkdd@presentationed_by -->
-
-
-    <owl:ObjectProperty rdf:about="http://conference_edas_sigkdd_confOf#conference@is_given_by__OR__sigkdd@presentationed_by">
-        <owl:inverseOf rdf:resource="http://conference_edas_sigkdd_confOf#conference@gives_presentations__OR__sigkdd@presentation"/>
-        <rdfs:domain rdf:resource="http://conference#Presentation"/>
-        <rdfs:domain rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_document__OR__edas@Document__OR__sigkdd@Document"/>
-        <rdfs:range rdf:resource="http://conference#Active_conference_participant"/>
-        <rdfs:range rdf:resource="http://sigkdd#Speaker"/>
     </owl:ObjectProperty>
     
 
@@ -1209,6 +1205,27 @@
         <owl:inverseOf rdf:resource="http://sigkdd#pay"/>
         <rdfs:domain rdf:resource="http://sigkdd#Registration_fee"/>
         <rdfs:range rdf:resource="http://conference_edas_sigkdd_confOf#conference@Person__OR__confOf@Person__OR__edas@Person__OR__sigkdd@Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://sigkdd#presentation -->
+
+
+    <owl:ObjectProperty rdf:about="http://sigkdd#presentation">
+        <rdfs:domain rdf:resource="http://sigkdd#Speaker"/>
+        <rdfs:range rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_document__OR__edas@Document__OR__sigkdd@Document"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://sigkdd#presentationed_by -->
+
+
+    <owl:ObjectProperty rdf:about="http://sigkdd#presentationed_by">
+        <owl:inverseOf rdf:resource="http://sigkdd#presentation"/>
+        <rdfs:domain rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_document__OR__edas@Document__OR__sigkdd@Document"/>
+        <rdfs:range rdf:resource="http://sigkdd#Speaker"/>
     </owl:ObjectProperty>
     
 
@@ -4868,7 +4885,7 @@
     <owl:Class rdf:about="http://sigkdd#Speaker">
         <owl:equivalentClass>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://conference_edas_sigkdd_confOf#conference@gives_presentations__OR__sigkdd@presentation"/>
+                <owl:onProperty rdf:resource="http://sigkdd#presentation"/>
                 <owl:someValuesFrom rdf:resource="http://conference_edas_sigkdd_confOf#conference@Conference_document__OR__edas@Document__OR__sigkdd@Document"/>
             </owl:Restriction>
         </owl:equivalentClass>

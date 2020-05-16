@@ -42,14 +42,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='4'>
-									<entity1 rdf:resource='http://edas#isReviewedBy'/>
-									<entity2 rdf:resource='http://ekaw#hasReviewer'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='5'>
 									<entity1 rdf:resource='http://edas#Place'/>
 									<entity2 rdf:resource='http://ekaw#Location'/>
@@ -74,14 +66,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='8'>
-									<entity1 rdf:resource='http://edas#isReviewing'/>
-									<entity2 rdf:resource='http://ekaw#reviewerOfPaper'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='9'>
 									<entity1 rdf:resource='http://edas#Organization'/>
 									<entity2 rdf:resource='http://ekaw#Organisation'/>
@@ -93,14 +77,6 @@
 								<Cell cid='10'>
 									<entity1 rdf:resource='http://edas#Author'/>
 									<entity2 rdf:resource='http://ekaw#Paper_Author'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
-								<Cell cid='11'>
-									<entity1 rdf:resource='http://edas#isLocationOf'/>
-									<entity2 rdf:resource='http://ekaw#locationOf'/>
 									<measure rdf:datatype='xsd:float'>1.0</measure>
 									<relation>=</relation>
 								</Cell>
@@ -193,14 +169,5 @@
 									<relation>=</relation>
 								</Cell>
 							</map>
-							<map>
-								<Cell cid='29'>
-									<entity1 rdf:resource='http://edas#hasLocation'/>
-									<entity2 rdf:resource='http://ekaw#heldIn'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-
 							</Alignment>
 	</rdf:RDF>

@@ -73,14 +73,6 @@
 								</Cell>
 							</map>
 							<map>
-								<Cell cid='6'>
-									<entity1 rdf:resource='http://conference#contributes'/>
-									<entity2 rdf:resource='http://iasted#write'/>
-									<measure rdf:datatype='xsd:float'>1.0</measure>
-									<relation>=</relation>
-								</Cell>
-							</map>
-							<map>
 								<Cell cid='7'>
 									<entity1 rdf:resource='http://conference#Review'/>
 									<entity2 rdf:resource='http://iasted#Review'/>

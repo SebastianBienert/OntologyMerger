@@ -61,14 +61,6 @@
 </map>
 <map>
 	<Cell>
-		<entity1 rdf:resource="http://cmt#email"/>
-		<entity2 rdf:resource="http://sigkdd#E-mail"/>
-		<measure rdf:datatype="xsd:float">1.0</measure>
-		<relation>=</relation>
-	</Cell>
-</map>
-<map>
-	<Cell>
 		<entity1 rdf:resource="http://cmt#Review"/>
 		<entity2 rdf:resource="http://sigkdd#Review"/>
 		<measure rdf:datatype="xsd:float">1.0</measure>
@@ -95,14 +87,6 @@
 	<Cell>
 		<entity1 rdf:resource="http://cmt#Author"/>
 		<entity2 rdf:resource="http://sigkdd#Author"/>
-		<measure rdf:datatype="xsd:float">1.0</measure>
-		<relation>=</relation>
-	</Cell>
-</map>
-<map>
-	<Cell>
-		<entity1 rdf:resource="http://cmt#submitPaper"/>
-		<entity2 rdf:resource="http://sigkdd#submit"/>
 		<measure rdf:datatype="xsd:float">1.0</measure>
 		<relation>=</relation>
 	</Cell>
