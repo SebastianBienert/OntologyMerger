@@ -122,9 +122,18 @@ public class OAEIOntologyMerger {
                 .filter(x -> x.contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
                 .count();
 
-        long sizeOfMapping = mappings.allMapings.keySet().stream()
-                .filter(x -> firstOntology.classesInSignature().anyMatch(c -> x.contains(c.getIRI().getShortForm())))
-                .count();
+        long sizeOfMapping = 0l;
+        for(OWLClass c : firstOntology.classesInSignature().collect(Collectors.toList())){
+            List<String> concepts = OWLEntityToSplitConceptNames(c).stream().map(x -> x.replace("@", "#")).collect(Collectors.toList());
+            if(concepts.stream().anyMatch(concept -> mappings.allMapings.keySet().stream().anyMatch(m -> m.substring(7).equals(concept)))){
+                sizeOfMapping += 1;
+            }
+        }
+
+
+//        long sizeOfMapping = mappings.allMapings.keySet().stream()
+//                .filter(x -> firstOntology.classesInSignature().anyMatch(c -> x.contains(c.getIRI().getShortForm())))
+//                .count();
 
         double maxDistancesSum = mappings.allMapings.entrySet().stream()
                 .filter(x -> x.getKey().contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
@@ -134,18 +143,38 @@ public class OAEIOntologyMerger {
                 .mapToDouble(n -> n)
                 .sum();
 
-        long numberOfEquivalents = mappings.allMapings.entrySet().stream()
-                .filter(x -> x.getKey().contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
-                .map(x -> x.getValue())
-                .map(x -> x.stream().count())
-                .mapToLong(x -> x)
-                .sum();
+        long numberOfEquivalents = 0l;
+        for(OWLClass c : firstOntology.classesInSignature().collect(Collectors.toList())){
+            List<String> concepts = OWLEntityToSplitConceptNames(c).stream().map(x -> x.replace("@", "#")).collect(Collectors.toList());
+            Optional<String> mapping = mappings.allMapings.keySet().stream().filter(m -> concepts.stream().anyMatch(concept -> m.substring(7).equals(concept))).findFirst();
+            if(mapping.isPresent()){
+                numberOfEquivalents += mappings.get(mapping.get()).size();
+            }
+        }
+
+//        long numberOfEquivalents = mappings.allMapings.entrySet().stream()
+//                .filter(x -> x.getKey().contains(firstOntology.getOntologyID().getOntologyIRI().get().getShortForm()))
+//                .map(x -> x.getValue())
+//                .map(x -> x.stream().count())
+//                .mapToLong(x -> x)
+//                .sum();
 
 
         double konwledgeIncrease = 1 - ((sizeOfMapping - maxDistancesSum) /
                 (firstOnotologyConceptsCount + secondOnotologyConceptsCount - numberOfEquivalents));
 
         return konwledgeIncrease;
+    }
+
+    public double NormalizeKnowledgeIncrease(List<Double> measures){
+        Double sum = measures.stream().reduce(0d, (acc, x) -> acc + x);
+        Double max = Double.valueOf(measures.size());
+        Double min = 0.0;
+        Double newMax = 1.0;
+        Double newMin = 0.0;
+
+        Double normalizedSum = ((sum - min) / (max - min)) * (newMax - newMin) + newMin;
+        return normalizedSum;
     }
 
 

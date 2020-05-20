@@ -137,12 +137,45 @@
     
 
 
+    <!-- http://confOf#reviewes -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#reviewes">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Member_PC__OR__edas@TPCMember"/>
+        <rdfs:range rdf:resource="http://confOf#Contribution"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://confOf#studyAt -->
 
 
     <owl:ObjectProperty rdf:about="http://confOf#studyAt">
         <rdfs:domain rdf:resource="http://confOf#Scholar"/>
         <rdfs:range rdf:resource="http://confOf#University"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#writes -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#writes">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
+        <rdfs:range rdf:resource="http://confOf#Contribution"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://confOf#writtenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://confOf#writtenBy">
+        <owl:inverseOf rdf:resource="http://confOf#writes"/>
+        <rdfs:domain rdf:resource="http://confOf#Contribution"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
+        <rdfs:comment>confTool</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -284,6 +317,16 @@
     
 
 
+    <!-- http://edas#hasRelatedPaper -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#hasRelatedPaper">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://edas#hasReviewHistory -->
 
 
@@ -420,6 +463,26 @@
     
 
 
+    <!-- http://edas#isReviewing -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#isReviewing">
+        <owl:inverseOf rdf:resource="http://edas#isReviewedBy"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://edas#ConferenceChair"/>
+                    <rdf:Description rdf:about="http://edas#Reviewer"/>
+                    <rdf:Description rdf:about="http://edas#SessionChair"/>
+                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC__OR__edas@TPCMember"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://edas#isTopicOf -->
 
 
@@ -433,6 +496,17 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://edas#isWrittenBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://edas#isWrittenBy">
+        <owl:inverseOf rdf:resource="http://edas#hasRelatedPaper"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
+        <rdfs:range rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
     </owl:ObjectProperty>
     
 
@@ -484,53 +558,6 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:range>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas_confOf#confOf@reviewes__OR__edas@isReviewing -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@reviewes__OR__edas@isReviewing">
-        <owl:inverseOf rdf:resource="http://edas#isReviewedBy"/>
-        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Member_PC__OR__edas@TPCMember"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://edas#ConferenceChair"/>
-                    <rdf:Description rdf:about="http://edas#Reviewer"/>
-                    <rdf:Description rdf:about="http://edas#SessionChair"/>
-                    <rdf:Description rdf:about="http://edas_confOf#confOf@Member_PC__OR__edas@TPCMember"/>
-                </owl:unionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://confOf#Contribution"/>
-        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas_confOf#confOf@writes__OR__edas@hasRelatedPaper -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@writes__OR__edas@hasRelatedPaper">
-        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
-        <rdfs:range rdf:resource="http://confOf#Contribution"/>
-        <rdfs:range rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
-        <rdfs:comment>confTool</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://edas_confOf#confOf@writtenBy__OR__edas@isWrittenBy -->
-
-
-    <owl:ObjectProperty rdf:about="http://edas_confOf#confOf@writtenBy__OR__edas@isWrittenBy">
-        <owl:inverseOf rdf:resource="http://edas_confOf#confOf@writes__OR__edas@hasRelatedPaper"/>
-        <rdfs:domain rdf:resource="http://confOf#Contribution"/>
-        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
-        <rdfs:range rdf:resource="http://edas_confOf#confOf@Author__OR__edas@Author"/>
-        <rdfs:comment>confTool</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -634,6 +661,19 @@
     
 
 
+    <!-- http://confOf#hasFirstName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasFirstName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+        <rdfs:comment>involved middle name</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://confOf#hasHomePage -->
 
 
@@ -697,6 +737,18 @@
                 </owl:unionOf>
             </owl:Class>
         </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>confTool</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://confOf#hasSurname -->
+
+
+    <owl:DatatypeProperty rdf:about="http://confOf#hasSurname">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>confTool</rdfs:comment>
     </owl:DatatypeProperty>
@@ -933,6 +985,26 @@
     
 
 
+    <!-- http://edas#hasFirstName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas#hasFirstName">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://edas#hasLastName -->
+
+
+    <owl:DatatypeProperty rdf:about="http://edas#hasLastName">
+        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://edas#hasName -->
 
 
@@ -1046,31 +1118,6 @@
         <rdfs:domain rdf:resource="http://edas#Conference"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
         <rdfs:comment>Conference Start Date and Time</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://edas_confOf#confOf@hasFirstName__OR__edas@hasFirstName -->
-
-
-    <owl:DatatypeProperty rdf:about="http://edas_confOf#confOf@hasFirstName__OR__edas@hasFirstName">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>confTool</rdfs:comment>
-        <rdfs:comment>involved middle name</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://edas_confOf#confOf@hasSurname__OR__edas@hasLastName -->
-
-
-    <owl:DatatypeProperty rdf:about="http://edas_confOf#confOf@hasSurname__OR__edas@hasLastName">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>confTool</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -2508,7 +2555,7 @@
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://edas_confOf#confOf@Person__OR__edas@Person"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://edas_confOf#confOf@reviewes__OR__edas@isReviewing"/>
+                        <owl:onProperty rdf:resource="http://edas#isReviewing"/>
                         <owl:someValuesFrom rdf:resource="http://edas_confOf#confOf@Paper__OR__edas@Paper"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
@@ -2724,13 +2771,13 @@
         <rdfs:subClassOf rdf:resource="http://edas_confOf#confOf@Person__OR__edas@Person"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@writes__OR__edas@hasRelatedPaper"/>
+                <owl:onProperty rdf:resource="http://confOf#writes"/>
                 <owl:someValuesFrom rdf:resource="http://confOf#Contribution"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@writes__OR__edas@hasRelatedPaper"/>
+                <owl:onProperty rdf:resource="http://confOf#writes"/>
                 <owl:allValuesFrom rdf:resource="http://confOf#Contribution"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2777,7 +2824,7 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@reviewes__OR__edas@isReviewing"/>
+                <owl:onProperty rdf:resource="http://confOf#reviewes"/>
                 <owl:someValuesFrom rdf:resource="http://confOf#Contribution"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2789,7 +2836,7 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@reviewes__OR__edas@isReviewing"/>
+                <owl:onProperty rdf:resource="http://confOf#reviewes"/>
                 <owl:allValuesFrom rdf:resource="http://confOf#Contribution"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -2879,13 +2926,13 @@
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@hasFirstName__OR__edas@hasFirstName"/>
+                <owl:onProperty rdf:resource="http://confOf#hasFirstName"/>
                 <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://edas_confOf#confOf@hasSurname__OR__edas@hasLastName"/>
+                <owl:onProperty rdf:resource="http://confOf#hasSurname"/>
                 <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
             </owl:Restriction>
         </rdfs:subClassOf>
