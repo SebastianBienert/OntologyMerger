@@ -32,16 +32,71 @@ public class OntologyProvider {
         ontologies.putIfAbsent("conference-edas", "src/test/resources/ontologies/conference-edas.owl");
         ontologies.putIfAbsent("conference-confOf", "src/test/resources/ontologies/conference-confOf.owl");
 
+        ontologies.putIfAbsent("cmt-conference", "src/test/resources/ontologies/cmt-conference.owl");
+        ontologies.putIfAbsent("cmt-confOf", "src/test/resources/ontologies/cmt-confOf.owl");
+
         ontologies.putIfAbsent("edas-confOf", "src/test/resources/ontologies/edas-confOf.owl");
+        ontologies.putIfAbsent("edas-iasted", "src/test/resources/ontologies/edas-iasted.owl");
+        ontologies.putIfAbsent("edas-sigkdd", "src/test/resources/ontologies/edas-sigkdd.owl");
+
+        ontologies.putIfAbsent("ekaw-sigkdd", "src/test/resources/ontologies/ekaw-sigkdd.owl");
+        ontologies.putIfAbsent("ekaw-conference", "src/test/resources/ontologies/ekaw-conference.owl");
 
         ontologies.putIfAbsent("sigkdd-edas", "src/test/resources/ontologies/sigkdd-edas.owl");
         ontologies.putIfAbsent("sigkdd-confOf", "src/test/resources/ontologies/sigkdd-confOf.owl");
 
+        ontologies.putIfAbsent("confOf-ekaw", "src/test/resources/ontologies/confOf-ekaw.owl");
+        ontologies.putIfAbsent("confOf-edas", "src/test/resources/ontologies/confOf-edas.owl");
 
+        ontologies.putIfAbsent("iasted-cmt", "src/test/resources/ontologies/iasted-cmt.owl");
+    /////////////////
+
+        ontologies.putIfAbsent("confOf_ekaw-sigkdd", "src/test/resources/ontologies/confOf_ekaw-sigkdd.owl");
         ontologies.putIfAbsent("conference_edas_confOf", "src/test/resources/ontologies/conference_edas-confOf.owl");
         ontologies.putIfAbsent("conference_sigkdd_confOf", "src/test/resources/ontologies/conference_sigkdd-confOf.owl");
         ontologies.putIfAbsent("conference_sigkdd_edas", "src/test/resources/ontologies/conference_sigkdd-edas.owl");
         ontologies.putIfAbsent("sigkdd_edas_confOf", "src/test/resources/ontologies/sigkdd_edas-confOf.owl");
+        ontologies.putIfAbsent("ekaw_sigkdd-confOf", "src/test/resources/ontologies/ekaw_sigkdd-confOf.owl");
+        ontologies.putIfAbsent("edas_iasted-cmt", "src/test/resources/ontologies/edas_iasted-cmt.owl");
+        ontologies.putIfAbsent("edas_iasted-ekaw", "src/test/resources/ontologies/edas_iasted-ekaw.owl");
+        ontologies.putIfAbsent("iasted_cmt-ekaw", "src/test/resources/ontologies/iasted_cmt-ekaw.owl");
+        ontologies.putIfAbsent("edas_sigkdd-conference", "src/test/resources/ontologies/edas_sigkdd-conference.owl");
+        ontologies.putIfAbsent("ekaw_conference-sigkdd", "src/test/resources/ontologies/ekaw_conference-sigkdd.owl");
+        ontologies.putIfAbsent("confOf_edas-ekaw", "src/test/resources/ontologies/confOf_edas-ekaw.owl");
+        ontologies.putIfAbsent("cmt_conference-sigkdd", "src/test/resources/ontologies/cmt_conference-sigkdd.owl");
+        ontologies.putIfAbsent("edas_sigkdd-iasted", "src/test/resources/ontologies/edas_sigkdd-iasted.owl");
+
+
+        //EXPERIMENT
+
+        ontologies.putIfAbsent("edas_iasted_cmt_ekaw-confOf", "src/test/resources/ontologies/edas_iasted_cmt_ekaw-confOf.owl");
+        ontologies.putIfAbsent("cmt_conference-edas_iasted", "src/test/resources/ontologies/cmt_conference-edas_iasted.owl");
+        ontologies.putIfAbsent("edas_iasted_cmt-ekaw", "src/test/resources/ontologies/edas_iasted_cmt-ekaw.owl");
+        ontologies.putIfAbsent("conference_sigkdd_edas-confOf", "src/test/resources/ontologies/conference_sigkdd_edas-confOf.owl");
+        ontologies.putIfAbsent("conference_sigkdd_edas_confOf-cmt", "src/test/resources/ontologies/conference_sigkdd_edas_confOf-cmt.owl");
+        ontologies.putIfAbsent("conference_sigkdd_edas_confOf_cmt-ekaw", "src/test/resources/ontologies/conference_sigkdd_edas_confOf_cmt-ekaw.owl");
+        ontologies.putIfAbsent("confOf_ekaw_sigkdd-cmt_conference", "src/test/resources/ontologies/confOf_ekaw_sigkdd-cmt_conference.owl");
+        ontologies.putIfAbsent("conference_sigkdd-confOf_edas", "src/test/resources/ontologies/conference_sigkdd-confOf_edas.owl");
+        ontologies.putIfAbsent("edas_iasted_ekaw-sigkdd", "src/test/resources/ontologies/edas_iasted_ekaw-sigkdd.owl");
+        ontologies.putIfAbsent("edas_iasted_ekaw_sigkdd-conference", "src/test/resources/ontologies/edas_iasted_ekaw_sigkdd-conference.owl");
+        ontologies.putIfAbsent("edas_sigkdd_conference-confOf", "src/test/resources/ontologies/edas_sigkdd_conference-confOf.owl");
+        ontologies.putIfAbsent("cmt_confOf-edas_iasted", "src/test/resources/ontologies/cmt_confOf-edas_iasted.owl");
+        ontologies.putIfAbsent("conference_edas-sigkdd_confOf", "src/test/resources/ontologies/conference_edas-sigkdd_confOf.owl");
+        ontologies.putIfAbsent("confOf_edas_ekaw-cmt_conference_sigkdd", "src/test/resources/ontologies/confOf_edas_ekaw-cmt_conference_sigkdd.owl");
+        ontologies.putIfAbsent("confOf_ekaw-cmt_conference", "src/test/resources/ontologies/confOf_ekaw-cmt_conference.owl");
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         ontologies.putIfAbsent("A", "src/test/resources/A.owl");
         ontologies.putIfAbsent("B", "src/test/resources/B.owl");
@@ -58,6 +113,11 @@ public class OntologyProvider {
 
     public OWLOntology getOntology(String name) throws OWLOntologyCreationException {
         OWLOntologyManager man = OWLManager.createOWLOntologyManager();
+        if(!_ontologies.containsKey(name)){
+            System.out.println("DOES NOT HAVE " + name);
+            return man.createOntology();
+        }
+
         OWLOntology ontology = man.loadOntologyFromOntologyDocument(new File(_ontologies.get(name)));
         return ontology;
     }
